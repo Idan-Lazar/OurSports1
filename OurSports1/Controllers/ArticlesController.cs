@@ -22,8 +22,13 @@ namespace OurSports1.Controllers
         // GET: Articles
         public async Task<IActionResult> Index()
         {
-            var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article,DateTime>(a=>a.TimeCreate);
-           
+            var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article, DateTime>(a => a.TimeCreate);
+            return View(await webSportContext.ToListAsync());
+        }
+        public async Task<IActionResult> IndexWithCategory(string s)
+        {
+
+            var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article, DateTime>(a => a.TimeCreate).Where(a => a.Category.Title == s);
             return View(await webSportContext.ToListAsync());
         }
 

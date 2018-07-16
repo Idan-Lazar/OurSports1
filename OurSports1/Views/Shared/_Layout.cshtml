@@ -26,17 +26,27 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">OurSports1</a>
+                <a asp-area="" asp-controller="Articles" asp-action="Index" class="navbar-brand">OurSport</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="Articles" asp-action="Index">Article</a></li>
-                    <li><a asp-area="" asp-controller="Authors" asp-action="Index">Author</a></li>
-                    <li><a asp-area="" asp-controller="Comments" asp-action="Index">Comments</a></li>
-                    <li><a asp-area="" asp-controller="Categories" asp-action="Index">Categories</a></li>
+                    <li><a asp-area="" asp-controller="Articles" asp-action="IndexWithCategory" asp-route-id="Israeli Soccer">Israeli Soccer</a></li>
+                    <li><a asp-area="" asp-controller="Articles" asp-action="Index">World Soccer</a></li>
+                    <li><a asp-area="" asp-controller="Articles" asp-action="IndexWithCategory" asp-route-id="Basketball">Basketball</a></li>
+                    <li><a asp-area="" asp-controller="Articles" asp-action="IndexWithCategory" asp-route-id="Nba">Nba</a></li>
+                    <li><a asp-area="" asp-controller="Articles" asp-action="IndexWithCategory" asp-route-id="Tennis">Tennis</a></li>
+
+
+
+                    @if (User.Identity.IsAuthenticated)
+    {
+                <li><a asp-area="" asp-controller="Articles" asp-action="Index">Article</a></li>
+                <li><a asp-area="" asp-controller="Authors" asp-action="Index">Author</a></li>
+                <li><a asp-area="" asp-controller="Comments" asp-action="Index">Comments</a></li>
+                <li><a asp-area="" asp-controller="Categories" asp-action="Index">Categories</a></li>
+                <li><a asp-area="" asp-controller="Stadiums" asp-action="Index">Stadiums</a></li>
+
+}
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>

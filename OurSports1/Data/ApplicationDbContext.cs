@@ -21,6 +21,8 @@ namespace OurSports1.Data
         public DbSet<OurSports1.Models.Comment> Comment { get; set; }
 
         public DbSet<OurSports1.Models.Category> Category { get; set; }
+        public DbSet<OurSports1.Models.Stadiums> Stadiums { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

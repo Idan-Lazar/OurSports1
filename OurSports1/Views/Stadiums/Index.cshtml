@@ -1,0 +1,36 @@
+﻿@model IEnumerable<OurSports1.Models.Stadiums>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3392.711311510527!2d35.192819084339135!3d31.75107998129386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502d78d1aad9a03%3A0x12d30a9ba15ca0ce!2z15DXpteY15PXmdeV158g15jXk9eZ!5e0!3m2!1siw!2sus!4v1531764159681" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>            </td>
+          
+        </tr>
+}
+    </tbody>
+</table>
