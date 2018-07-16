@@ -40,7 +40,7 @@
                             <div class="carousel-caption" role="option" Id="ArticleText">
                                 <h1> @item.Title</h1>
                                 <p>
-                                    @item.Secondary_title; <br />
+                                    @item.Secondary_title <br />
                                     <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID">Read More..</a>
                                    
                                 </p>
@@ -51,7 +51,8 @@
                 </div>
             }
 
-
+            else
+            {
 
             <tr class="ArticleBox">
                 <td>
@@ -91,6 +92,7 @@
                     <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
                 </td>
             </tr>
+            }
         }
     </tbody>
 </table>
