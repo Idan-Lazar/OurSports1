@@ -208,14 +208,11 @@ namespace OurSports1.Controllers
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
-            int r = _signInManager.UserManager.Users.Select(a => a.UserName).Count<String>();
-            if (r == 0)
-            {
+           
                 ViewData["CanRegister"] = "Yes";
                 ViewData["ReturnUrl"] = returnUrl;
                 return View();
-            }
-ViewData["CanRegister"] = "NO";
+           
             return View();
                 
             

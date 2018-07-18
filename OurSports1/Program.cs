@@ -7,6 +7,10 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using OurSports1.Models;
+using Microsoft.Extensions.DependencyInjection;
+using OurSports1.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace OurSports1
 {
@@ -14,7 +18,30 @@ namespace OurSports1
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<ApplicationDbContext>();
+                    
+                    //if (context.Users.Any())
+                    //{
+                    //    DbInitializer.AddUserAsync(services, "Admin@gmail.com", "Admin_1234");
+                    //}
+                    DbInitializer.Initialize(context, services);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred while seeding the database.");
+                }
+            }
+
+            host.Run();
+
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OurSports1.Models;
 using OurSports1.Data;
+using System.Globalization;
 
 namespace OurSports1.Controllers
 {
@@ -22,6 +23,10 @@ namespace OurSports1.Controllers
         // GET: Articles
         public async Task<IActionResult> Index()
         {
+            IEnumerable<String> Monthes = new List<String>( DateTimeFormatInfo.CurrentInfo.MonthNames);
+            ViewData["Month"] = new SelectList(Monthes);
+            ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Title");
+
             var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article, DateTime>(a => a.TimeCreate);
             return View(await webSportContext.ToListAsync());
         }
@@ -43,14 +48,17 @@ namespace OurSports1.Controllers
             var article = await _context.Article
                 .Include(a => a.Author)
                 .SingleOrDefaultAsync(m => m.ID == id);
-
-            var ai = (from Comment in _context.Comment select Comment).Where(m => m.ArticleID == id);
-            ICollection<Comment> Comments = ai.ToArray<Comment>();
-
             if (article == null)
             {
                 return NotFound();
             }
+            
+           
+            ICollection<Comment> Comments = (from Comment in _context.Comment select Comment).Where(m => m.ArticleID == id).ToArray<Comment>();
+           
+            
+
+           
             return View(article);
         }
 
@@ -81,6 +89,8 @@ namespace OurSports1.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(article);
+                Author a = (from Author in _context.Author select Author).Where(m => m.ID == article.AuthorID).First();
+                Category cat = (from Category in _context.Category select Category).Where(m => m.ID == article.CategoryID).First();
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

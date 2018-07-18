@@ -15,6 +15,15 @@
     </p>
 }
 
+<form asp-controller="Movies" asp-action="Index" class="panel-collapse">
+    <p>
+       Month:<select type="month" name="FilterMonth" asp-items="ViewBag.Month"> g</select>
+      Writer Name:<input type="text" name="FilterWriterName">
+     Category:<select type="text" name="FilterCategory" asp-items="ViewBag.CategoryID"> </select>
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 <table class="table">
 
     <tbody>

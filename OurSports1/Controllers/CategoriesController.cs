@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OurSports1.Data;
 using OurSports1.Models;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace OurSports1.Controllers
 {
@@ -35,6 +36,11 @@ namespace OurSports1.Controllers
 
             var category = await _context.Category
                 .SingleOrDefaultAsync(m => m.ID == id);
+
+            var ai = (from Article in _context.Article select Article).Where(m => m.ID == id);
+            ICollection<Article> Aricles = ai.ToArray<Article>();
+
+           
             if (category == null)
             {
                 return NotFound();

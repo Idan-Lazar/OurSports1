@@ -10,12 +10,46 @@
     <h4>Category</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+       @foreach (var item in Model.Articles){
+        <tr class="ArticleBox">
+            <td>
+                <img src="~/images/@item.Image" width="200" height="200" />
+            </td>
+            <td>
+                <span class="Title"> @Html.DisplayNameFor(modelitem => item.Title)</span> <br />
+                <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
+                <span><a href="/Authors/Details/@item.Author.ID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
+                <a asp-action="Details" asp-route-id="@item.ID">Read More..</a>
+                @*<a id="sharefblink" target="_top" href="http://www.facebook.com/sharer.php?
+                 u=http://localhost:54552/Articles/Details/11">share</a>
+
+
+
+                <div id="fb-root"></div>
+                <script>
+                    (function (d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = 'https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v3.0';
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));</script>
+                <div class="fb-share-button" data-href="/Articles/Details/11" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A54552%2FArticles%2FDetails%2F11&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">שתף</a></div>*@
+            </td>
+
+
+
+            <td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                }
+
+                <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
+            </td>
+        </tr>
+}
     </dl>
 </div>
 <div>
