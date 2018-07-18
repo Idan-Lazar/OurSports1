@@ -46,15 +46,14 @@ namespace OurSports1.Controllers
             }
 
             var article = await _context.Article
-                .Include(a => a.Author)
+                .Include(a => a.Author).Include(c => c.Category).Include(co => co.Comments)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (article == null)
             {
                 return NotFound();
             }
+
             
-           
-            ICollection<Comment> Comments = (from Comment in _context.Comment select Comment).Where(m => m.ArticleID == id).ToArray<Comment>();
            
             
 
@@ -89,8 +88,8 @@ namespace OurSports1.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(article);
-                Author a = (from Author in _context.Author select Author).Where(m => m.ID == article.AuthorID).First();
-                Category cat = (from Category in _context.Category select Category).Where(m => m.ID == article.CategoryID).First();
+              
+              
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

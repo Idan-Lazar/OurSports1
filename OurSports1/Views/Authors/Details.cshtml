@@ -30,17 +30,33 @@
         </dd>
     </dl>
 
-    @foreach (var item in Model.Articles)
-    {
-        <tr>
-            <td>
-                <a href="/Articles/Details/@item.ID">@Html.DisplayFor(modelitem => item.Title)</a> <br />
-<td>
-        </tr>
+    <table class="ArticleTable" >
 
+        
+            <col width="200">
+            <col width="400">
 
-    }
-    
+            @foreach (var item in Model.Articles)
+            {
+                <tr class="ArticleBox">
+                    <td class="ArticleBoxImg">
+                        <img src="~/images/@item.Image" alt="~/images/~/Sport.jpg" width="200" height="200" />
+                    </td>
+                    <td>
+                        <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
+                        <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
+                        <span><a href="/Authors/Details/@item.Author.ID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
+                        <a asp-action="Details" asp-route-id="@item.ID">Read More..</a>
+                      
+                    </td>
+                 
+                </tr>
+                  <tr class="empty"> </tr>
+            }
+
+     
+    </table>
+
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |

@@ -8,23 +8,22 @@
 @{
     bool b = false;
 }
-@if (User.Identity.IsAuthenticated)
-{
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-}
 
-<form asp-controller="Movies" asp-action="Index" class="panel-collapse">
-    <p>
-       Month:<select type="month" name="FilterMonth" asp-items="ViewBag.Month"> g</select>
-      Writer Name:<input type="text" name="FilterWriterName">
-     Category:<select type="text" name="FilterCategory" asp-items="ViewBag.CategoryID"> </select>
-        <input type="submit" value="Filter" />
-    </p>
-</form>
+<nav class="navbar navbar-light bg-light">
+   
+    <form class="form-inline Searchline" asp-controller="Movies" asp-action="Index" >
+        <p>
+        Month: <select class="form-control mr-sm-2" type="month" name="FilterMonth" asp-items="ViewBag.Month"> g</select>
+            Writer Name: <input class="form-control mr-sm-2"  type="text" name="FilterWriterName">
+            Category: <select class="form-control mr-sm-2" type="text" name="FilterCategory" asp-items="ViewBag.CategoryID"> </select>
+            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Filter" />
+        </p>
+    </form>
 
-<table class="table">
+
+</nav>
+
+<table class="ArticleTable" cellspacing="35" >
 
     <tbody>
         <col width="200">
@@ -32,6 +31,7 @@
 
         @foreach (var item in Model)
         {
+            
             @if (b == false)
             {
                 @if (b = true) { }
@@ -42,14 +42,17 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
-
-                            <img src="~/images/@item.Image" alt="ASP.NET" id="ArticlePhoto">
-
-                            <div class="carousel-caption" role="option" Id="ArticleText">
+                             <img src="~/images/@item.Image" alt="~/images/~/Sport.jpg" id="ArticlePhoto">
+                             <div class="carousel-caption" role="option" Id="ArticleText">
                                 <h1> @item.Title</h1>
                                 <p>
                                     @item.Secondary_title <br />
                                     <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID">Read More..</a>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <a class="btn-danger" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                                        <a class="btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                                    }
 
                                 </p>
                             </div>
@@ -63,14 +66,15 @@
             {
 
                 <tr class="ArticleBox">
-                    <td>
+                    <td class="ArticleBoxImg">
                         <img src="~/images/@item.Image" width="200" height="200" />
                     </td>
-                    <td>
+                    <td class="ArticleBoxText">
                         <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
                         <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
                         <span><a href="/Authors/Details/@item.Author.ID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
                         <a asp-action="Details" asp-route-id="@item.ID">Read More..</a>
+
                         @*<a id="sharefblink" target="_top" href="http://www.facebook.com/sharer.php?
                              u=http://localhost:54552/Articles/Details/11">share</a>
 
@@ -93,14 +97,22 @@
                     <td>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                            <a class="btn-danger" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                            <a class="btn-danger"asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                         }
 
                         <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
                     </td>
-                </tr>
+                </tr> 
+                <br />
+             
             }
         }
     </tbody>
 </table>
+@if (User.Identity.IsAuthenticated)
+{
+    <h3>
+        <a asp-action="Create">Create New</a>
+    </h3>
+}

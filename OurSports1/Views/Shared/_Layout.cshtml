@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OurSports1</title>
-
+   
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -30,21 +31,31 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Articles" asp-action="IndexWithCategory" asp-route-id="Israeli Soccer">Israeli Soccer</a></li>
-                    <li><a asp-area="" asp-controller="Articles" asp-action="Index">World Soccer</a></li>
-                    <li><a asp-area="" asp-controller="Articles" asp-action="IndexWithCategory" asp-route-id="Basketball">Basketball</a></li>
-                    <li><a asp-area="" asp-controller="Articles" asp-action="IndexWithCategory" asp-route-id="Nba">Nba</a></li>
-                    <li><a asp-area="" asp-controller="Articles" asp-action="IndexWithCategory" asp-route-id="Tennis">Tennis</a></li>
+                   
+                    
+                    <li><a asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="1">Israeli Soccer</a></li>
+                    <li><a asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="2">Worls Soccer</a></li>
+                    <li><a asp-area=""asp-controller="Categories" asp-action="Details" asp-route-id="3">Basketball</a></li>
+                    <li><a asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="4">Nba</a></li>
+                    <li><a asp-area=""asp-controller="Categories" asp-action="Details" asp-route-id="5">Tennis</a></li>
 
 
 
                     @if (User.Identity.IsAuthenticated)
-    {
-                <li><a asp-area="" asp-controller="Articles" asp-action="Index">Article</a></li>
-                <li><a asp-area="" asp-controller="Authors" asp-action="Index">Author</a></li>
-                <li><a asp-area="" asp-controller="Comments" asp-action="Index">Comments</a></li>
-                <li><a asp-area="" asp-controller="Categories" asp-action="Index">Categories</a></li>
-                <li><a asp-area="" asp-controller="Stadiums" asp-action="Index">Stadiums</a></li>
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Admin-Options
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="Articles" asp-action="Index">Article</a><br /> 
+                       <a asp-area="" class="dropdown-item" asp-controller="Authors" asp-action="Index">Author</a><br /> 
+                        <a asp-area="" class="dropdown-item" asp-controller="Comments" asp-action="Index">Comments</a><br /> 
+                        <a asp-area="" class="dropdown-item" asp-controller="Categories" asp-action="Index">Categories</a><br /> 
+                       <a asp-area="" class="dropdown-item" asp-controller="Stadiums" asp-action="Index">Stadiums</a><br /> 
+</div>
+                        </li>
+               
 
 }
                 </ul>

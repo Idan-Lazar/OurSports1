@@ -11,6 +11,7 @@ using OurSports1.Models;
 using Microsoft.Extensions.DependencyInjection;
 using OurSports1.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor.Internal;
 
 namespace OurSports1
 {
@@ -32,6 +33,7 @@ namespace OurSports1
                     //    DbInitializer.AddUserAsync(services, "Admin@gmail.com", "Admin_1234");
                     //}
                     DbInitializer.Initialize(context, services);
+                    
                 }
                 catch (Exception ex)
                 {
@@ -39,7 +41,7 @@ namespace OurSports1
                     logger.LogError(ex, "An error occurred while seeding the database.");
                 }
             }
-
+      
             host.Run();
 
         }

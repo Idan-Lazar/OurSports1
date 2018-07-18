@@ -34,13 +34,13 @@ namespace OurSports1.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category
+            var category = await _context.Category.Include(a=>a.Articles)
                 .SingleOrDefaultAsync(m => m.ID == id);
-
-            var ai = (from Article in _context.Article select Article).Where(m => m.ID == id);
-            ICollection<Article> Aricles = ai.ToArray<Article>();
-
-           
+            
+            foreach (Article art in category.Articles)
+            {
+                Author a = (from Author in _context.Author select Author).Where(m => m.ID == art.AuthorID).First();
+            }
             if (category == null)
             {
                 return NotFound();

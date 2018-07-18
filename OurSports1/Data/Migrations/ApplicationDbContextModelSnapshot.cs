@@ -325,6 +325,7 @@ namespace OurSports1.Data.Migrations
 
             modelBuilder.Entity("OurSports1.Models.Comment", b =>
                 {
+
                     b.HasOne("OurSports1.Models.Article", "Article")
                         .WithMany("Comments")
                         .HasForeignKey("ArticleID")
