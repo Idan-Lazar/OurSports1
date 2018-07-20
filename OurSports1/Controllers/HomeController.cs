@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OurSports1.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OurSports1.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
         public IActionResult Index()

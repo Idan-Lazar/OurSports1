@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OurSports1.Data;
 using OurSports1.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OurSports1.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class StadiumsController : Controller
     {
         private readonly ApplicationDbContext _context;

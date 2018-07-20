@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OurSports1.Data;
 using OurSports1.Models;
-
+using Microsoft.AspNetCore.Authorization;
+ 
 namespace OurSports1.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CommentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -45,13 +47,14 @@ namespace OurSports1.Controllers
             return View(comment);
         }
 
+        [AllowAnonymous]
         // GET: Comments/Create
         public IActionResult Create(int? num)
         {
             ViewData["ArticleID"] = num;
             return View();
         }
-
+        [AllowAnonymous]
         public IActionResult Thanks()
         {
 

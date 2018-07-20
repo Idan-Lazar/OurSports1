@@ -2,69 +2,48 @@
 @inject IAuthorizationService AuthorizationService
 @model IEnumerable<OurSports1.Models.Article>
 
-@{
-    ViewData["Title"] = "Index";
-}
-@{
-    bool b = false;
-}
-<nav class="navbar navbar-light bg-light">
+<h2>Articles Archive </h2>
+<h5>Here you can find articles <span class="font-weight-bold text-uppercase text-success">From All Time</span> just for you: <br /> you can use our filter form to find you article</h5>
+<div>
+    <nav class="navbar navbar-light bg-light Searchline">
 
-    <form class="form-inline Searchline" asp-controller="Movies" asp-action="Index">
-        <p>
-            Month: <select class="form-control mr-sm-2" type="month" name="FilterMonth" asp-items="ViewBag.Month"> g</select>
-            Writer Name: <input class="form-control mr-sm-2" type="text" name="FilterWriterName">
-            Category: <select class="form-control mr-sm-2" type="text" name="FilterCategory" asp-items="ViewBag.CategoryID"> </select>
-            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Filter" />
-        </p>
-    </form>
+        <form class="form-inline Searchline" asp-controller="Movies" asp-action="Index">
+            <p>
+                Month: <select class="form-control mr-sm-2" type="month" name="FilterMonth" asp-items="ViewBag.Month"> g</select>
+                Writer Name: <input class="form-control mr-sm-2" type="text" name="FilterWriterName">
+                Category: <select class="form-control mr-sm-2" type="text" name="FilterCategory" asp-items="ViewBag.CategoryID"> </select>
+                <input class="btn btn-success my-2 my-sm-0" type="submit" value="Filter" />
+            </p>
+        </form>
 
 
-</nav>
+    </nav>
+    <hr />
+    <dl class="dl-horizontal">
+        <table class="ArticleTable">
 
-<table class="ArticleTable" cellspacing="35">
+            <tbody>
+                <col width="200">
+                <col width="400">
 
-    <tbody>
-        <col width="200">
-        <col width="400">
+                @foreach (var item in Model)
+                {
 
-        @foreach (var item in Model)
-        {
+                    <tr class="ArticleBox">
+                        <td>
+                            <img src="~/images/@item.Image" class="Article BoxImg" />
+                        </td>
+                        <td class="ArticleBoxText">
+                            <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
+                            <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
+                            <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
+                            <a class="btn btn-primary" asp-controller="Articles" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
+                        </td>
+                    </tr>
+                }
 
-            <tr class="ArticleBox">
-                <td class="ArticleBoxImg">
-                    <img src="~/images/@item.Image" width="200" height="200" />
-                </td>
-                <td class="ArticleBoxText">
-                    <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
-                    <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
-                    <span><a href="/Authors/Details/@item.Author.ID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
-                    <a asp-action="Details" asp-route-id="@item.ID">Read More..</a>
+            </tbody>
+        </table>
 
-
-                <td>
-
-                    <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
-                </td>
-                <td>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <a class="btn " asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                        <a class="btn " asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                    }
-
-
-                </td>
-            </tr>
-            <br />
-
-        }
-
-    </tbody>
-</table>
-@if (User.Identity.IsAuthenticated)
-{
-    <h3>
-        <a asp-action="Create">Create New</a>
-    </h3>
-}
+    </dl>
+</div>

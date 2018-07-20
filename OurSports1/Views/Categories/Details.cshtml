@@ -2,41 +2,42 @@
 
 
 
+<div class="mainContent">
+    <h2>@Model.Title</h2>
 
-<h2>@Model.Title</h2>
+    <div>
 
-<div>
+        <hr />
+        <dl class="dl-horizontal">
+            <table class="ArticleTable">
 
-    <hr />
-    <dl class="dl-horizontal">
-        <table class="ArticleTable">
+                <tbody>
+                    <col width="200">
+                    <col width="400">
 
-            <tbody>
-                <col width="200">
-                <col width="400">
-
-                @foreach (var item in Model.Articles)
+                    @foreach (var item in Model.Articles)
                     {
 
-                    <tr>
-                    <td class="ArticleBoxImg">
-                        <img src = "~/images/@item.Image" width="200" height="200" />
-                    </td>
-                    <td class="ArticleBoxText">
-                        <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
-                        <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
-                        <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
-                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
-                        </td>
-                    </tr>
-                }
+                        <tr class="ArticleBox">
+                            <td>
+                                <img src="~/images/@item.Image" class="Article BoxImg" />
+                            </td>
+                            <td class="ArticleBoxText">
+                                <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
+                                <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
+                                <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
+                                <a class="btn btn-primary" asp-controller="Articles" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
+                            </td>
+                        </tr>
+                    }
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+    </div>

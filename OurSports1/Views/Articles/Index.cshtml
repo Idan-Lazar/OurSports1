@@ -6,113 +6,101 @@
     ViewData["Title"] = "Index";
 }
 @{
-    bool b = false;
+    Article first = Model.First();
 }
+<div class="mainContent">
+  
 
-<nav class="navbar navbar-light bg-light">
-
-    <form class="form-inline Searchline" asp-controller="Movies" asp-action="Index">
-        <p>
-            Month: <select class="form-control mr-sm-2" type="month" name="FilterMonth" asp-items="ViewBag.Month"> g</select>
-            Writer Name: <input class="form-control mr-sm-2" type="text" name="FilterWriterName">
-            Category: <select class="form-control mr-sm-2" type="text" name="FilterCategory" asp-items="ViewBag.CategoryID"> </select>
-            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Filter" />
-        </p>
-    </form>
-
-
-</nav>
-
-<table class="ArticleTable" cellspacing="35">
-
-    <tbody>
-        <col width="200">
-        <col width="400">
-
-        @foreach (var item in Model)
-        {
-
-            @if (b == false)
-            {
-                @if (b = true) { }
-                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-
-                    </ol>
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="~/images/@item.Image" alt="~/images/~/Sport.jpg" class="Article Index">
-                            <div class="carousel-caption" role="option" Id="ArticleText">
-                                <h1> @item.Title</h1>
-                                <p>
-                                    @item.Secondary_title <br />
-                                    <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.ID">Read More..</a>
-                                    @if (User.Identity.IsAuthenticated)
-                                    {
-                                        <a class="btn-danger" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                                        <a class="btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                                    }
-
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-
-            else
-            {
-
-                <tr class="ArticleBox">
-
-                    <td class="ArticleBoxImg">
-                        <img src="~/images/@item.Image" width="200" height="200" />
-                    </td>
-                    <td class="ArticleBoxText">
-                        <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
-                        <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
-                        <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
-                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
-
-                        @*<a id="sharefblink" target="_top" href="http://www.facebook.com/sharer.php?
-                             u=http://localhost:54552/Articles/Details/11">share</a>
-
-
-
-                            <div id="fb-root"></div>
-                            <script>
-                                (function (d, s, id) {
-                                    var js, fjs = d.getElementsByTagName(s)[0];
-                                    if (d.getElementById(id)) return;
-                                    js = d.createElement(s); js.id = id;
-                                    js.src = 'https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v3.0';
-                                    fjs.parentNode.insertBefore(js, fjs);
-                                }(document, 'script', 'facebook-jssdk'));</script>
-                            <div class="fb-share-button" data-href="/Articles/Details/11" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A54552%2FArticles%2FDetails%2F11&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">שתף</a></div>*@
-                    </td>
-
-
-
-                    <td>
+    <div id="carouselExampleSlidesOnly" class="carousel slide  shadow shadow-lg border border-success">
+        <div class="carousel">
+            <div class="carousel-item active">
+                <img src="~/images/@first.Image" alt="~/images/~/Sport.jpg" class="Article BoxIndex">
+                <div class="carousel-caption d-none d-md-block" role="option" Id="ArticleText">
+                    <h1> @first.Title</h1>
+                    <p>
+                        @first.Secondary_title <br />
+                        <a asp-action="Details" class="btn btn-primary" asp-route-id="@first.ID">Read More..</a>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <a class="btn btn-danger" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                            <a class="btn-danger" asp-action="Edit" asp-route-id="@first.ID">Edit</a>
+                            <a class="btn-danger" asp-action="Delete" asp-route-id="@first.ID">Delete</a>
                         }
 
-                        <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
-                    </td>
-                </tr>
-                <br />
+                    </p>
+                </div>
 
-            }
-        }
-    </tbody>
-</table>
-@if (User.Identity.IsAuthenticated)
-{
-    <h3>
-        <a asp-action="Create">Create New</a>
-    </h3>
-}
+            </div>
+        </div>
+    </div>
+    <dl class="dl-horizontal">
+        <table class="ArticleTable">
+
+            <tbody>
+                <col width="200">
+                <col width="400">
+
+                @foreach (var item in Model.Where(a => a.ID != Model.First().ID))
+            {
+
+
+                    <tr class="ArticleBox">
+
+                        <td>
+                            <img src="~/images/@item.Image" width="200" height="200" class="Article BoxImg Index" />
+                        </td>
+                        <td class="ArticleBoxText">
+                            <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
+                            <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
+                            <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
+                            <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
+
+                            @*<a id="sharefblink" target="_top" href="http://www.facebook.com/sharer.php?
+                                 u=http://localhost:54552/Articles/Details/11">share</a>
+
+
+
+                                <div id="fb-root"></div>
+                                <script>
+                                    (function (d, s, id) {
+                                        var js, fjs = d.getElementsByTagName(s)[0];
+                                        if (d.getElementById(id)) return;
+                                        js = d.createElement(s); js.id = id;
+                                        js.src = 'https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v3.0';
+                                        fjs.parentNode.insertBefore(js, fjs);
+                                    }(document, 'script', 'facebook-jssdk'));</script>
+                                <div class="fb-share-button" data-href="/Articles/Details/11" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A54552%2FArticles%2FDetails%2F11&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">שתף</a></div>*@
+                        </td>
+
+
+
+                        <td>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="btn btn-danger" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                            }
+
+                            <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
+                        </td>
+                    </tr>
+
+
+                }
+
+            </tbody>
+        </table>
+
+    </dl>
+</div>
+<aside class="sideContent">
+    <section>
+        <div class="card" style="width: 18rem;">
+            <img class="ArchiveImage" src="~/images/archive.jpg">
+            <div class="card-body">
+                <h5 class="card-title">Archive</h5>
+                <p class="card-text">If you want to<span class="font-weight-bold text-uppercase"> Search</span> and <span class="font-weight-bold text-uppercase">find out</span> more Articles, <br /> The Archive is the right place for you!</p>
+                <a class="btn btn-outline-info" asp-action="IndexAll" >To The Archive..</a>
+            </div>
+        </div>
+    </section>
+</aside>

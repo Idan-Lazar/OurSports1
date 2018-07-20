@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using OurSports1.Models;
 using OurSports1.Data;
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OurSports1.Controllers
 {
@@ -20,6 +21,7 @@ namespace OurSports1.Controllers
             _context = context;
         }
 
+        
         // GET: Articles
         public async Task<IActionResult> Index()
         {
@@ -30,10 +32,10 @@ namespace OurSports1.Controllers
             var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article, DateTime>(a => a.TimeCreate);
             return View(await webSportContext.ToListAsync());
         }
-        public async Task<IActionResult> IndexWithCategory(string s)
+        public async Task<IActionResult> IndexAll()
         {
 
-            var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article, DateTime>(a => a.TimeCreate).Where(a => a.Category.Title == s);
+            var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article, DateTime>(a => a.TimeCreate);
             return View(await webSportContext.ToListAsync());
         }
 
@@ -61,6 +63,7 @@ namespace OurSports1.Controllers
             return View(article);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Articles/Create
         public IActionResult Create()
         {
@@ -78,11 +81,13 @@ namespace OurSports1.Controllers
             return View();
         }
 
+
         // POST: Articles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("ID,Title,Secondary_title,Content,AuthorID,CategoryID,TimeCreate,Image")] Article article)
         {
             if (ModelState.IsValid)
@@ -107,6 +112,7 @@ namespace OurSports1.Controllers
         }
 
         // GET: Articles/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -137,6 +143,7 @@ namespace OurSports1.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Secondary_title,Content,AuthorID,CategoryID,TimeCreate,Image")] Article article)
         {
@@ -171,6 +178,7 @@ namespace OurSports1.Controllers
         }
 
         // GET: Articles/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -191,6 +199,7 @@ namespace OurSports1.Controllers
 
         // POST: Articles/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
