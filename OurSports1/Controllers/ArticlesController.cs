@@ -23,7 +23,7 @@ namespace OurSports1.Controllers
         // GET: Articles
         public async Task<IActionResult> Index()
         {
-            IEnumerable<String> Monthes = new List<String>( DateTimeFormatInfo.CurrentInfo.MonthNames);
+            IEnumerable<String> Monthes = new List<String>(DateTimeFormatInfo.CurrentInfo.MonthNames);
             ViewData["Month"] = new SelectList(Monthes);
             ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Title");
 
@@ -53,11 +53,11 @@ namespace OurSports1.Controllers
                 return NotFound();
             }
 
-            
-           
-            
 
-           
+
+
+
+
             return View(article);
         }
 
@@ -88,8 +88,8 @@ namespace OurSports1.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(article);
-              
-              
+
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

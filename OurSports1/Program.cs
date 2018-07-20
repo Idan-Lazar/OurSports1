@@ -27,13 +27,13 @@ namespace OurSports1
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
-                    
+
                     //if (context.Users.Any())
                     //{
                     //    DbInitializer.AddUserAsync(services, "Admin@gmail.com", "Admin_1234");
                     //}
                     DbInitializer.Initialize(context, services);
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -41,7 +41,7 @@ namespace OurSports1
                     logger.LogError(ex, "An error occurred while seeding the database.");
                 }
             }
-      
+
             host.Run();
 
         }

@@ -208,14 +208,14 @@ namespace OurSports1.Controllers
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
-           
-                ViewData["CanRegister"] = "Yes";
-                ViewData["ReturnUrl"] = returnUrl;
-                return View();
-           
+
+            ViewData["CanRegister"] = "Yes";
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
-                
-            
+
+            return View();
+
+
         }
 
         [HttpPost]
@@ -223,7 +223,7 @@ namespace OurSports1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
-           
+
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {

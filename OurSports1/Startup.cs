@@ -33,23 +33,23 @@ namespace OurSports1
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-          CreateRoles(services.BuildServiceProvider());
+            CreateRoles(services.BuildServiceProvider());
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                              // Add application services.
+            // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-           
-          
-            
+
+
+
             services.AddMvc();
 
-         
+
         }
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {
             //initializing custom roles 
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            string[] roleNames = { "Admin"};
+            string[] roleNames = { "Admin" };
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)
@@ -86,7 +86,7 @@ namespace OurSports1
                 }
             }
         }
-       
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {

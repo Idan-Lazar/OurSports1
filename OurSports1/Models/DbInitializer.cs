@@ -12,11 +12,11 @@ namespace OurSports1.Models
 {
     public class DbInitializer
     {
-        public static async System.Threading.Tasks.Task AddUserAsync(IServiceProvider services, string email,string password)
+        public static async System.Threading.Tasks.Task AddUserAsync(IServiceProvider services, string email, string password)
         {
-            ILogger _logger = services.GetRequiredService< ILogger>();
+            ILogger _logger = services.GetRequiredService<ILogger>();
             IEmailSender _emailSender = services.GetRequiredService<IEmailSender>();
-            SignInManager<ApplicationUser> _signInManager =  services.GetRequiredService<SignInManager<ApplicationUser>>();
+            SignInManager<ApplicationUser> _signInManager = services.GetRequiredService<SignInManager<ApplicationUser>>();
 
             UserManager<ApplicationUser> _userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
             var user = new ApplicationUser { UserName = email, Email = email };
@@ -32,15 +32,15 @@ namespace OurSports1.Models
                 await _signInManager.SignInAsync(user, isPersistent: false);
 
             }
-           
+
         }
         public static void Initialize(ApplicationDbContext context, IServiceProvider services)
         {
-          
-            context.Database.EnsureCreated();
-          
 
-           
+            context.Database.EnsureCreated();
+
+
+
             if (context.Author.Any() && context.Category.Any() && context.Article.Any())
             {
                 return;
@@ -164,4 +164,4 @@ namespace OurSports1.Models
 }
 
 
- 
+

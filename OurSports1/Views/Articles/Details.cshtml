@@ -57,47 +57,48 @@
 
     </dl>
 
-            <table  class="comments table">
-                @foreach (var item in Model.Comments){
+    <table class="comments table">
+        @foreach (var item in Model.Comments)
+        {
             <tr>
                 <td>
                     <span class="label-success">@Html.DisplayNameFor(modelitem => item.Title): @Html.DisplayFor(modelitem => item.Title)  </span>
                     <span class="label-danger">  @Html.DisplayNameFor(modelitem => item.WriterName): @Html.DisplayFor(modelitem => item.WriterName)  </span>
                     <span class="label-info">@Html.DisplayNameFor(modelitem => item.Content): @Html.DisplayFor(modelitem => item.Content)  </span>
-                   
-                    
+
+
 
                 </td>
             </tr>
-}
-
-
-              
-
-
-            </table>
-
-              
+        }
 
 
 
-       
+
+
+    </table>
+
+
+
+
+
+
 
     <form asp-controller="Comments" asp-action="Create" method="get" target="_blank" onclick="f()">
         <p>
-            <input id="idArt"  type="hidden" name="num" value="@Model.ID">
+            <input id="idArt" type="hidden" name="num" value="@Model.ID">
             <input class="btn-primary" type="submit" value="הוסף תגובה" />
         </p>
     </form>
     <script>
         function f(){
             var x = @Model.ID;
-            
-            
+
+
                 window.open('/Comments/Create?num='+x, '', 'scrollbars=no,menubar=no,height=600,width=800,resizable=yes,toolbar=no,status=no');
         }
     </script>
-    
+
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |

@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OurSports1</title>
-   
+
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
-        
+
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -31,13 +31,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                   
-                    
+
+
                     <li><a asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="1">Israeli Soccer</a></li>
                     <li><a asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="2">Worls Soccer</a></li>
-                    <li><a asp-area=""asp-controller="Categories" asp-action="Details" asp-route-id="3">Basketball</a></li>
+                    <li><a asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="3">Basketball</a></li>
                     <li><a asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="4">Nba</a></li>
-                    <li><a asp-area=""asp-controller="Categories" asp-action="Details" asp-route-id="5">Tennis</a></li>
+                    <li><a asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="5">Tennis</a></li>
 
 
 
@@ -48,16 +48,16 @@
                                 Admin-Options
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" asp-controller="Articles" asp-action="Index">Article</a><br /> 
-                       <a asp-area="" class="dropdown-item" asp-controller="Authors" asp-action="Index">Author</a><br /> 
-                        <a asp-area="" class="dropdown-item" asp-controller="Comments" asp-action="Index">Comments</a><br /> 
-                        <a asp-area="" class="dropdown-item" asp-controller="Categories" asp-action="Index">Categories</a><br /> 
-                       <a asp-area="" class="dropdown-item" asp-controller="Stadiums" asp-action="Index">Stadiums</a><br /> 
-</div>
+                                <a class="dropdown-item" asp-controller="Articles" asp-action="Index">Article</a><br />
+                                <a asp-area="" class="dropdown-item" asp-controller="Authors" asp-action="Index">Author</a><br />
+                                <a asp-area="" class="dropdown-item" asp-controller="Comments" asp-action="Index">Comments</a><br />
+                                <a asp-area="" class="dropdown-item" asp-controller="Categories" asp-action="Index">Categories</a><br />
+                                <a asp-area="" class="dropdown-item" asp-controller="Stadiums" asp-action="Index">Stadiums</a><br />
+                            </div>
                         </li>
-               
 
-}
+
+                    }
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>

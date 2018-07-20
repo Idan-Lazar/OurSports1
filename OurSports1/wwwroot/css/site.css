@@ -39,7 +39,6 @@
     padding: 10px;
     width: 100%;
     height: 500px;
-    
 }
 
 
@@ -52,24 +51,27 @@
     text-shadow: 0.1px 0.1px 1px;
     font-size: 20px;
 }
+
 tr.ArticleBox {
     box-shadow: 1px 1px 5px;
     border-radius: 50px;
     padding: 100px;
     margin: 25px 50px 75px 100px;
 }
+
 td.ArticleBoxImg {
     padding: 25px;
 }
 
 table.ArticleTable {
-   
     margin: auto;
     width: auto;
 }
-.Searchline{
-    padding-top:20px;
+
+.Searchline {
+    padding-top: 20px;
 }
+
 container.body-content {
     margin-top: 50px;
 }

@@ -13,7 +13,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-         
+
             <div class="form-group">
                 <label asp-for="WriterName" class="control-label"></label>
                 <input asp-for="WriterName" class="form-control" />
@@ -29,7 +29,7 @@
                 <input asp-for="Content" class="form-control" />
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
-            <input  type="hidden" asp-for="ArticleID" class="form-control" value="@ViewData["ArticleID"]" readonly />
+            <input type="hidden" asp-for="ArticleID" class="form-control" value="@ViewData["ArticleID"]" readonly />
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

@@ -54,7 +54,7 @@ namespace OurSports1.Controllers
 
         public IActionResult Thanks()
         {
-           
+
             return View();
         }
 

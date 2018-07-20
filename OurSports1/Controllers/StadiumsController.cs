@@ -12,13 +12,13 @@ namespace OurSports1.Controllers
 {
     public class StadiumsController : Controller
     {
-        private readonly ApplicationDbContext _context; 
+        private readonly ApplicationDbContext _context;
 
         public StadiumsController(ApplicationDbContext context)
         {
             _context = context;
         }
-        
+
         // GET: Categories
         public async Task<IActionResult> Index()
         {
