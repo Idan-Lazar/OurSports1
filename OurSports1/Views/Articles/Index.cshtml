@@ -42,12 +42,12 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
-                            <img src="~/images/@item.Image" alt="~/images/~/Sport.jpg" id="ArticlePhoto">
+                            <img src="~/images/@item.Image" alt="~/images/~/Sport.jpg" class="Article Index">
                             <div class="carousel-caption" role="option" Id="ArticleText">
                                 <h1> @item.Title</h1>
                                 <p>
                                     @item.Secondary_title <br />
-                                    <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID">Read More..</a>
+                                    <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.ID">Read More..</a>
                                     @if (User.Identity.IsAuthenticated)
                                     {
                                         <a class="btn-danger" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
@@ -57,7 +57,6 @@
                                 </p>
                             </div>
                         </div>
-
                     </div>
                 </div>
             }
@@ -66,14 +65,15 @@
             {
 
                 <tr class="ArticleBox">
+
                     <td class="ArticleBoxImg">
                         <img src="~/images/@item.Image" width="200" height="200" />
                     </td>
                     <td class="ArticleBoxText">
                         <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
                         <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
-                        <span><a href="/Authors/Details/@item.Author.ID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
-                        <a asp-action="Details" asp-route-id="@item.ID">Read More..</a>
+                        <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
+                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
 
                         @*<a id="sharefblink" target="_top" href="http://www.facebook.com/sharer.php?
                              u=http://localhost:54552/Articles/Details/11">share</a>
@@ -97,8 +97,8 @@
                     <td>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <a class="btn-danger" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                            <a class="btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                            <a class="btn btn-danger" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                         }
 
                         <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />

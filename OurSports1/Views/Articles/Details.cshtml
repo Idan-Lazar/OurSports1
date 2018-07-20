@@ -5,49 +5,24 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h1>@Html.DisplayFor(model => model.Title)</h1>
+<hr />
 
-<div>
-    <h4>Article</h4>
+    <h3>@Html.DisplayFor(model => model.Secondary_title)</h3>
+    <h5> <a asp-controller="Categories" asp-action="Details" asp-route-id="@Model.CategoryID"> @Html.DisplayFor(modelItem => modelItem.Category.Title)</a> </h5>
+    <h6> <a asp-controller="Authors" asp-action="Details" asp-route-id="@Model.AuthorID"> @Html.DisplayFor(modelItem => modelItem.Author.AuthorName)</a>  - @Html.DisplayFor(model => model.TimeCreate) </h6>
+    <div>
+        <img  src="~/images/@Model.Image" alt="~/images/~/Sport.jpg" class="Article">
+    <div />
+        <div class="A" >
+            <p class="A"> idan</p>
+        </div>
     <hr />
-    <dl class="dropdown">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Secondary_title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Secondary_title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd>
-            <img src="~/images/@Model.Image" width="200" height="200" />
-
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Author.ID)
-        <dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Category.ID)
-        <dd>
+   <p>
+       @Html.DisplayFor(modelItem => modelItem.Content);
+   </p>
+       
+      
 
 
 
@@ -55,7 +30,6 @@
 
 
 
-    </dl>
 
     <table class="comments table">
         @foreach (var item in Model.Comments)
