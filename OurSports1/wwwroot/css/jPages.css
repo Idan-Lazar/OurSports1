@@ -1,0 +1,32 @@
+.holder {
+	
+}
+
+.holder a {
+	font-size: 20px;
+	cursor: pointer;
+	margin: auto;
+	color: #333;
+}
+
+.holder a:hover {
+	
+}
+
+.holder a.jp-previous { }
+.holder a.jp-next {  }
+
+.holder a.jp-current, a.jp-current:hover { 
+	
+}
+
+.holder a.jp-disabled, a.jp-disabled:hover {
+	
+}
+
+.holder a.jp-current, a.jp-current:hover,
+.holder a.jp-disabled, a.jp-disabled:hover {
+	
+}
+
+.holder span { margin: 0 5px; }

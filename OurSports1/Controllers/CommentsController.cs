@@ -65,6 +65,8 @@ namespace OurSports1.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [AllowAnonymous]
+ 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,WriterName,Title,Content,ArticleID")] Comment comment)
         {

@@ -5,34 +5,60 @@
 <h2>Articles Archive </h2>
 <h5>Here you can find articles <span class="font-weight-bold text-uppercase text-success">From All Time</span> just for you: <br /> you can use our filter form to find you article</h5>
 <div>
-   
+
     <nav class="navbar navbar-light bg-light Searchline">
 
-        <form class="form-inline Searchline" asp-controller="Article" asp-action="Index">
+        <form class="form-inline Searchline Archive" asp-controller="Articles" asp-action="IndexAll" asp-route-Month="Month">
             <p>
-                Month: <select class="form-control mr-sm-2" type="Month" value="Month" name="FilterMonth" asp-items="ViewBag.Months"> g</select>
-                Year: <select class="form-control mr-sm-2" type="Year"  value="Year" name="FilterMonth" asp-items="ViewBag.Years"> g</select>
-                Writer Name:<select class="form-control mr-sm-2" value="Author"  value="Year"  name="FilterMonth" asp-items="ViewBag.AuthorID"> g</select>
-                Category: <select class="form-control mr-sm-2"  type="text" name="FilterCategory" asp-items="ViewBag.CategoryID"> </select>
-                <input class="btn btn-success my-2 my-sm-0" type="submit" value="Filter" />
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="true" id="Month" name="Month">
+                    Month: <select class="form-control mr-sm-2 disabled" type="Month" id="MonthSelect" value="Month" title="" name="MonthSelect" asp-items="ViewBag.Months" disabled> </select>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="true" id="Year" name="Year">
+                    Year: <select class="form-control mr-sm-2 disabled" type="Year" id="YearSelect" value="Year" name="YearSelect" asp-items="ViewBag.Years" disabled></select>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="true" id="Writer" name="Writer">
+                    Writer Name:<select class="form-control mr-sm-2" value="Author" id="WriterSelect" value="Year" name="WriterSelect" asp-items="ViewBag.AuthorID" disabled></select>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="true" id="Category" name="Category">
+                    Category: <select class="form-control mr-sm-2" type="text" id="CategorySelect" name="CategorySelect" asp-items="ViewBag.CategoryID" disabled> </select>
+                </div>
+                <button type="submit" class="btn btn-outline-success font-weight-bold " Text="Filter">Filter</button>
+
             </p>
         </form>
 
 
     </nav>
+    @if (ViewData["Result"].ToString() != "empty")
+    {
+        <hr />
+        if (ViewData["Status"].ToString() == "true")
+        {
+            
+            <h3 class="font-weight-bold text-success ">@ViewData["Result"]</h3>
+        }
+        else
+        {
+            <h3 class="font-weight-bold text-danger ">@ViewData["Result"]</h3>
+        }
+
+
+    }
+   
     <hr />
-    <dl class="dl-horizontal">
-        <table class="ArticleTable">
-
-            <tbody>
-                <col width="300">
-                <col width="500">
-
-                @foreach (var item in Model)
-                {
-
+    <div class="holder">
+    </div>
+    <ul id="itemContainer">
+        @foreach (var item in Model)
+        {
+            <li>
+                <table class="ArticleTable">
                     <tr class="ArticleBox">
-                        <td align="center">
+                        <td align="center" class="BoxImg">
                             <img src="~/images/@item.Image" class="Article BoxImg" />
                         </td>
                         <td class="ArticleBoxText">
@@ -41,11 +67,16 @@
                             <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
                             <a class="btn btn-primary" asp-controller="Articles" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
                         </td>
+                        <td>
+                            <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
+                        </td>
                     </tr>
-                }
+                </table>
+            </li>
+        }
+    </ul>
 
-            </tbody>
-        </table>
 
-    </dl>
+    <div class="holder">
+    </div>
 </div>

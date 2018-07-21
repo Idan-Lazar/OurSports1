@@ -1,7 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    margin:100px;
+
 }
 
 /* Wrapping element */
@@ -79,20 +79,36 @@ img.Article {
 tr.ArticleBox {
     box-shadow: 1px 1px 5px;
     border-radius: 50px;
+    height: auto;
 }
-
+    tr.ArticleBox td {
+        padding: 25px
+    }
 img.BoxImg {
-    padding: 25px;
+   margin: 10px;
 
     
+}
+
+textarea#Content {
+    max-height: 150px;
+    height:50px;
+}
+
+    td .BoxImg{
+    width:300px;
+
 }
 img.Article.BoxImg {
-    border-radius: 50px;
+    border-radius: 15%;
     object-fit: cover;
     object-position: center;
-    height: 200px;
-    width: 300px;
+ 
+   
     
+}
+.ArticleBoxText {
+    width: 450px;
 }
 img.Article.BoxIndex {
    width:100%;
@@ -100,9 +116,13 @@ img.Article.BoxIndex {
 }
 table.ArticleTable {
     margin: auto;
-    width: auto%;
+   
+    width: 1000px;
     border-collapse: separate;
     border-spacing: 10px 10px;
+}
+li{
+    list-style:none;
 }
 table.comments.table {
     margin: auto 0;

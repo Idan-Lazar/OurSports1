@@ -30,17 +30,18 @@ namespace OurSports1.Controllers
             var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article, DateTime>(a => a.TimeCreate);
             return View(await webSportContext.ToListAsync());
         }
-        public async Task<IActionResult> IndexAll()
+        public async Task<IActionResult> IndexAll(string Month,String MonthSelect, string Year, String YearSelect, String Writer, String WriterSelect, string Category , String CategorySelect)
         {
+            ViewData["Status"] = "true";
             IEnumerable<String> Monthes = new List<String>(DateTimeFormatInfo.CurrentInfo.MonthNames);
             for (int year = 2009; year <= DateTime.Now.Year; year++)
-            ViewData["Months"] = new SelectList(Monthes);
+                ViewData["Months"] = new SelectList(Monthes);
             var yeras = new List<String>();
             for (int year = 2016; year <= DateTime.Now.Year; year++)
             {
                 yeras.Add(year.ToString());
             }
-                ViewData["Years"] = new SelectList(yeras);
+            ViewData["Years"] = new SelectList(yeras);
             ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Title");
             var stands =
       _context.Author
@@ -52,7 +53,45 @@ namespace OurSports1.Controllers
 
 
             ViewData["AuthorID"] = new SelectList(stands, "ID", "Description");
-            var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article, DateTime>(a => a.TimeCreate);
+            var Articles = _context.Article.Include(a => a.Author).Include(a => a.Category).Select(a=>a);
+            
+            if (Month == "true")
+            {
+               Articles = Articles.Where(a => a.TimeCreate.Month.ToString() == MonthSelect);
+                
+
+            }
+            if(Year == "true")
+            {
+                Articles = Articles.Where(a => a.TimeCreate.Year.ToString() == YearSelect);
+            }
+            if(Writer=="true")
+            {
+                Articles = Articles.Where(a => a.AuthorID.ToString() == WriterSelect);
+            }
+            if(Category == "true")
+            {
+                Articles = Articles.Where(a => a.CategoryID.ToString() == CategorySelect);
+            }
+            else
+            {
+                
+                ViewData["Result"] = "empty";
+            }
+           
+            if(Articles.Count()==0)
+            {
+                ViewData["Status"] = "false";
+                ViewData["Result"] = "There is no such article...";
+               Articles= _context.Article.Include(a => a.Author).Include(a => a.Category).Select(a => a);
+            }
+            else if (ViewData["Result"].ToString() != "empty")
+            {
+                ViewData["Result"] = "We Found "+Articles.Count()+" Articles For You!";
+            }
+          
+            var webSportContext = Articles.OrderByDescending<Article, DateTime>(a => a.TimeCreate);
+          
             return View(await webSportContext.ToListAsync());
         }
 
