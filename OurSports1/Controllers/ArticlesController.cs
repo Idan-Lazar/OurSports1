@@ -33,6 +33,7 @@ namespace OurSports1.Controllers
         public async Task<IActionResult> IndexAll(string Month,String MonthSelect, string Year, String YearSelect, String Writer, String WriterSelect, string Category , String CategorySelect)
         {
             ViewData["Status"] = "true";
+            ViewData["Result"] = "f";
             IEnumerable<String> Monthes = new List<String>(DateTimeFormatInfo.CurrentInfo.MonthNames);
             for (int year = 2009; year <= DateTime.Now.Year; year++)
                 ViewData["Months"] = new SelectList(Monthes);
