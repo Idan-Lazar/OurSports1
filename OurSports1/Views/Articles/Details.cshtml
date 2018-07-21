@@ -32,24 +32,39 @@
             {
                 <tr class="comments rounded shadow shadow-sm">
                     <td>
-                        <span class="text-capitalize text-danger font-weight-bold text-lg-right">@Html.DisplayNameFor(modelitem => item.Title):</span>
-                        <span class="text-capitalize text-dark  text-lg-right">@Html.DisplayFor(modelitem => item.Title)      </span>
+                        <table class="comment">
+                            <tr>
+                                <td>
+                                    <span class="text-capitalize text-danger font-weight-bold text-lg-right">@Html.DisplayNameFor(modelitem => item.Title):</span>
+                                <td>
+                                    <span class="text-capitalize text-dark  text-lg-right">@Html.DisplayFor(modelitem => item.Title)      </span>
+                                <td>
+                                    <span class="text-capitalize text-success font-weight-bold text-sm-center">  @Html.DisplayNameFor(modelitem => item.WriterName):    </span>
+                                <td>
+                                    <span class="text-capitalize text-dark  text-lg-right">@Html.DisplayFor(modelitem => item.WriterName)    </span>
+                                </td>
+                               
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="text-capitalize text-info font-weight-bold text-sm-right">@Html.DisplayNameFor(modelitem => item.Content):    </span>
+                                </td>
+                                    <td colspan="3">
+                                    <span class="text-capitalize text-dark  text-lg-right">@Html.DisplayFor(modelitem => item.Content)   </span>
+                                </td>
 
-                        <span class="text-capitalize text-success font-weight-bold text-sm-center">  @Html.DisplayNameFor(modelitem => item.WriterName):    </span>
-                        <span class="text-capitalize text-dark  text-lg-right">@Html.DisplayFor(modelitem => item.WriterName)    </span><br />
+                            </tr>
+                            
+                        </table>
 
-                        <span class="text-capitalize text-info font-weight-bold text-sm-right">@Html.DisplayNameFor(modelitem => item.Content):    </span>
-                        <span class="text-capitalize text-dark  text-lg-right">@Html.DisplayFor(modelitem => item.Content)   </span>
-
-
-                    </td>
+</td>
                 </tr>
             }
         </table>
         <form asp-controller="Comments" asp-action="Create" method="get" target="_blank" onclick="f()">
             <p>
                 <input id="idArt" type="hidden" name="num" value="@Model.ID">
-                <input class="btn btn-outline-danger" type="submit" value="הוסף תגובה" />
+                <input class="btn btn-outline-danger font-weight-bold" type="submit" value="Add Comment" />
             </p>
         </form>
         <script>

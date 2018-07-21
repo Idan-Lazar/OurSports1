@@ -20,17 +20,9 @@
 }
 aside.sideContent {
     display: table-cell;
-   
+    padding-left: 35px;
 }
 
-asideaside.sideContent section {
-    margin: 22px 0 0 22px;
-    padding: 11px 22px;
-    background: url("images/sidebar_section_background.png") repeat-x;
-    /* Border-radius not implemented yet */
-    -moz-border-radius: 11px;
-    -webkit-border-radius: 11px;
-}
 
     /* Carousel */
     .carousel-caption p {
@@ -99,7 +91,7 @@ img.Article.BoxImg {
     object-fit: cover;
     object-position: center;
     height: 200px;
-    width: 200px;
+    width: 300px;
     
 }
 img.Article.BoxIndex {
@@ -108,7 +100,7 @@ img.Article.BoxIndex {
 }
 table.ArticleTable {
     margin: auto;
-    width: auto;
+    width: auto%;
     border-collapse: separate;
     border-spacing: 10px 10px;
 }
@@ -145,4 +137,17 @@ footer {
 
     width: 100%;
     display:table-cell;
+}
+
+form.FormLogOut
+{
+   border-radius:15%;
+  
+}
+
+form.FormLogOut li a:hover {
+        background-color: blue;
+    }
+ form.FormLogOut li button:hover {
+    background-color:brown
 }

@@ -5,13 +5,15 @@
 <h2>Articles Archive </h2>
 <h5>Here you can find articles <span class="font-weight-bold text-uppercase text-success">From All Time</span> just for you: <br /> you can use our filter form to find you article</h5>
 <div>
+   
     <nav class="navbar navbar-light bg-light Searchline">
 
-        <form class="form-inline Searchline" asp-controller="Movies" asp-action="Index">
+        <form class="form-inline Searchline" asp-controller="Article" asp-action="Index">
             <p>
-                Month: <select class="form-control mr-sm-2" type="month" name="FilterMonth" asp-items="ViewBag.Month"> g</select>
-                Writer Name: <input class="form-control mr-sm-2" type="text" name="FilterWriterName">
-                Category: <select class="form-control mr-sm-2" type="text" name="FilterCategory" asp-items="ViewBag.CategoryID"> </select>
+                Month: <select class="form-control mr-sm-2" type="Month" value="Month" name="FilterMonth" asp-items="ViewBag.Months"> g</select>
+                Year: <select class="form-control mr-sm-2" type="Year"  value="Year" name="FilterMonth" asp-items="ViewBag.Years"> g</select>
+                Writer Name:<select class="form-control mr-sm-2" value="Author"  value="Year"  name="FilterMonth" asp-items="ViewBag.AuthorID"> g</select>
+                Category: <select class="form-control mr-sm-2"  type="text" name="FilterCategory" asp-items="ViewBag.CategoryID"> </select>
                 <input class="btn btn-success my-2 my-sm-0" type="submit" value="Filter" />
             </p>
         </form>
@@ -23,14 +25,14 @@
         <table class="ArticleTable">
 
             <tbody>
-                <col width="200">
-                <col width="400">
+                <col width="300">
+                <col width="500">
 
                 @foreach (var item in Model)
                 {
 
                     <tr class="ArticleBox">
-                        <td>
+                        <td align="center">
                             <img src="~/images/@item.Image" class="Article BoxImg" />
                         </td>
                         <td class="ArticleBoxText">

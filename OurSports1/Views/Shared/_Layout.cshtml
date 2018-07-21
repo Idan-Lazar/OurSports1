@@ -8,7 +8,6 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="####" crossorigin="anonymous">
 
     </environment>
     <environment exclude="Development">
@@ -19,15 +18,16 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-expand-xl navbar-dark bg-success mx-5">
-        <a class="navbar-brand" asp-area="" asp-controller="Articles" asp-action="Index">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success font-weight-bold mx-5">
+        <a class="navbar-brand" asp-area="" asp-controller="Articles" asp-action="Index">Our Soprt</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse navbar-expand-sm" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+                <li class="nav-pills">
                     <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="1">Israeli Soccer</a>
                 </li>
                 <li class="nav-item">
@@ -52,12 +52,12 @@
 
 
             </ul>
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto text-center font-weight-bold">
                 @if (User.Identity.IsAuthenticated)
                 {
 
-                    <li class="nav-item float-right dropdown">
-                        <a class="btn-danger btn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item float-right dropdown m-auto w-100 p-2 ">
+                        <a class="btn-danger btn font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Admin Extra
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -69,18 +69,21 @@
                         </div>
                     </li>
 
-                    <li class="nav-item float-right">
+                    <li class="nav-item float-right m-auto w-100 p-2 ">
 
-                        <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="5">Admin Home</a>
+                        <a class="nav-link active font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="5">Admin Home</a>
                     </li>
                 }
-                @await Html.PartialAsync("_LoginPartial")
+                <span class="font-weight-bold">
+                    @await Html.PartialAsync("_LoginPartial")
+                </span>
+              
 
             </ul>
 
-            </div>
+        </div>
 
-        </nav>
+    </nav>
 
         <div class="container">
             <div class=" body-content">

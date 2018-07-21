@@ -39,19 +39,25 @@
         @foreach (var item in Model.Articles)
             {
             <tr class="ArticleBox">
-                <td class="ArticleBoxImg">
-                    <img src="~/images/@item.Image" alt="~/images/~/Sport.jpg" width="200" height="200" />
-                </td>
+
                 <td>
+                    <img src="~/images/@item.Image" width="200" height="200" class="Article BoxImg Index" />
+                </td>
+                <td class="ArticleBoxText">
                     <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
                     <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
-                    <span><a href="/Authors/Details/@item.Author.ID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
-                    <a asp-action="Details" asp-route-id="@item.ID">Read More..</a>
-
+                    <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
                 </td>
 
+
+
+                <td>
+
+
+                    <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
+                </td>
             </tr>
-                <tr class="empty"> </tr>
         }
 
 

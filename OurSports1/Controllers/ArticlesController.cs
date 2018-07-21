@@ -25,16 +25,33 @@ namespace OurSports1.Controllers
         // GET: Articles
         public async Task<IActionResult> Index()
         {
-            IEnumerable<String> Monthes = new List<String>(DateTimeFormatInfo.CurrentInfo.MonthNames);
-            ViewData["Month"] = new SelectList(Monthes);
-            ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Title");
+          
 
             var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article, DateTime>(a => a.TimeCreate);
             return View(await webSportContext.ToListAsync());
         }
         public async Task<IActionResult> IndexAll()
         {
+            IEnumerable<String> Monthes = new List<String>(DateTimeFormatInfo.CurrentInfo.MonthNames);
+            for (int year = 2009; year <= DateTime.Now.Year; year++)
+            ViewData["Months"] = new SelectList(Monthes);
+            var yeras = new List<String>();
+            for (int year = 2016; year <= DateTime.Now.Year; year++)
+            {
+                yeras.Add(year.ToString());
+            }
+                ViewData["Years"] = new SelectList(yeras);
+            ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Title");
+            var stands =
+      _context.Author
+        .Select(s => new
+        {
+            ID = s.ID,
+            Description = s.AuthorName + "  (" + s.ID + ")"
+        }).ToList();
 
+
+            ViewData["AuthorID"] = new SelectList(stands, "ID", "Description");
             var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article, DateTime>(a => a.TimeCreate);
             return View(await webSportContext.ToListAsync());
         }
