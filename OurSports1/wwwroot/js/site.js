@@ -23,7 +23,7 @@ function countChar(val) {
     }
 };
 
-/using jqery to cahnge the page nav style
+
 $(".holder").has("a").ready(function () {
     $(".holder").wrapInner("<ul class='pagination'></ul>");
     $(".holder ul").css("width", "fit-content");
