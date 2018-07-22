@@ -76,7 +76,7 @@ namespace OurSports1.Controllers
             }
             else
             {
-                
+                int x;
                 ViewData["Result"] = "empty";
             }
            
