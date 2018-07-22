@@ -51,7 +51,7 @@ $(function (){
     var live;
    
     $.ajax({
-        url: "https://apifootball.com/api/?action=get_events&from=2017-04-01&to=2017-04-24&league_id=150&APIkey=df4ea49a08ed63529e46516ab69c3012e32ac721aafa8186a1d8c05fd61a5df6",
+        url: "https://apifootball.com/api/?action=get_events&from=2018-05-1&to=2018-05-15&league_id=62&APIkey=df4ea49a08ed63529e46516ab69c3012e32ac721aafa8186a1d8c05fd61a5df6",
         dataType: 'json', 
         type: 'get', 
         cache: false,
@@ -69,6 +69,58 @@ $(function (){
                     $("td.country_name").addClass("text-danger font-weight-bold");
 
                 } });
+        }
+    });
+});
+$(function () {
+    var live;
+
+    $.ajax({
+        url: "https://apifootball.com/api/?action=get_events&from=2018-05-1&to=2018-05-15&league_id=109&APIkey=df4ea49a08ed63529e46516ab69c3012e32ac721aafa8186a1d8c05fd61a5df6",
+        dataType: 'json',
+        type: 'get',
+        cache: false,
+        success: function (data) {
+            $(data).each(function (index, value) {
+                if (index < 5) {
+
+                    $(".container1json").append("<tr class='score " + index + "'></tr>");
+                    $(".container1json tr.score." + index).wrapInner("<table class='table'></table>").addClass("box");
+                    $(".container1json tr.score." + index + " table").append("<tr class='score '><td class='country_name'>" + value.country_name + "</td></tr>");
+                    $(".container1json tr.score." + index + " table").append("<tr class='score '><td class='league_name'>" + value.league_name + "</td></tr>");
+                    $(".container1json tr.score." + index + " table").append("<tr class='score '><td class='match_date'>" + value.match_date + "</td></tr>");
+                    $(".container1json tr.score." + index + " table").append("<tr class='score '><td class='match_hometeam_name'>" + value.match_hometeam_name +
+                        "</td>" + "<td class='match_hometeam_score'>" + value.match_hometeam_score + "</td>" + "</td>" + "<td class='match_awayteam_name'>" + value.match_awayteam_name + "</td>" + "<td class='match_awayteam_score'>" + value.match_awayteam_score + "</td>" + "</tr>");
+                    $("td.country_name").addClass("text-danger font-weight-bold");
+
+                }
+            });
+        }
+    });
+});
+$(function () {
+    var live;
+
+    $.ajax({
+        url: "https://apifootball.com/api/?action=get_events&from=2018-01-1&to=2018-01-15&league_id=437&APIkey=df4ea49a08ed63529e46516ab69c3012e32ac721aafa8186a1d8c05fd61a5df6",
+        dataType: 'json',
+        type: 'get',
+        cache: false,
+        success: function (data) {
+            $(data).each(function (index, value) {
+                if (index < 5) {
+
+                    $(".container2json").append("<tr class='score " + index + "'></tr>");
+                    $(".container2json tr.score." + index).wrapInner("<table class='table'></table>").addClass("box");
+                    $(".container2json tr.score." + index + " table").append("<tr class='score '><td class='country_name'>" + value.country_name + "</td></tr>");
+                    $(".container2json tr.score." + index + " table").append("<tr class='score '><td class='league_name'>" + value.league_name + "</td></tr>");
+                    $(".container2json tr.score." + index + " table").append("<tr class='score '><td class='match_date'>" + value.match_date + "</td></tr>");
+                    $(".container2json tr.score." + index + " table").append("<tr class='score '><td class='match_hometeam_name'>" + value.match_hometeam_name +
+                        "</td>" + "<td class='match_hometeam_score'>" + value.match_hometeam_score + "</td>" + "</td>" + "<td class='match_awayteam_name'>" + value.match_awayteam_name + "</td>" + "<td class='match_awayteam_score'>" + value.match_awayteam_score + "</td>" + "</tr>");
+                    $("td.country_name").addClass("text-danger font-weight-bold");
+
+                }
+            });
         }
     });
 });

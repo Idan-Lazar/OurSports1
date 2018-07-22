@@ -30,6 +30,10 @@ namespace OurSports1.Controllers
             var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article, DateTime>(a => a.TimeCreate);
             return View(await webSportContext.ToListAsync());
         }
+        public async Task<IActionResult> SoccerEvents()
+        {
+            return View();
+        }
         public async Task<IActionResult> IndexAll(string Month,String MonthSelect, string Year, String YearSelect, String Writer, String WriterSelect, string Category , String CategorySelect)
         {
             ViewData["Status"] = "true";

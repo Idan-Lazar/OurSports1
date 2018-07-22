@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-OurSports1-E16C781F-E712-4DF3-BF13-90D6DFCB147C</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20180722222317_in.cs" />
+    <Compile Remove="Data\Migrations\20180722222317_in.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="gmaps-api-net" Version="0.22.0" />

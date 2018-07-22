@@ -22,6 +22,7 @@ namespace OurSports1.Models
 
         public DateTime TimeCreate { get; set; }
         public string Image { get; set; }
+
     }
 }
 

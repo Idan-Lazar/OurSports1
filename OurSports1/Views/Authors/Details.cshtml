@@ -26,8 +26,7 @@
             @Html.DisplayNameFor(model => model.Image)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
+            <img src="~/images/@Model.Image" alt="~/images/~/Sport.jpg" class="Article shadow shadow-sm border-bottom-0 rounded" id="imgdetails">        </dd>
     </dl>
 
     <table class="ArticleTable">
@@ -46,6 +45,7 @@
                 <td class="ArticleBoxText">
                     <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
                     <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
+
                     <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
                     <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
                 </td>
