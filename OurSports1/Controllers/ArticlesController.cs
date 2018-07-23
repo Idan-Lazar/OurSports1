@@ -30,13 +30,14 @@ namespace OurSports1.Controllers
             var webSportContext = _context.Article.Include(a => a.Author).Include(a => a.Category).OrderByDescending<Article, DateTime>(a => a.TimeCreate);
             return View(await webSportContext.ToListAsync());
         }
-        public async Task<IActionResult> SoccerEvents()
+        public IActionResult SoccerEvents()
         {
             return View();
         }
-        public async Task<IActionResult> IndexAll(string Month,String MonthSelect, string Year, String YearSelect, String Writer, String WriterSelect, string Category , String CategorySelect)
+        public async Task<IActionResult> IndexAll(String Month,String MonthSelect, String Year, String YearSelect, String Writer, String WriterSelect, string Category , String CategorySelect)
         {
             ViewData["Status"] = "true";
+            
             ViewData["Result"] = "f";
             IEnumerable<String> Monthes = new List<String>(DateTimeFormatInfo.CurrentInfo.MonthNames);
             for (int year = 2009; year <= DateTime.Now.Year; year++)
@@ -60,9 +61,11 @@ namespace OurSports1.Controllers
             ViewData["AuthorID"] = new SelectList(stands, "ID", "Description");
             var Articles = _context.Article.Include(a => a.Author).Include(a => a.Category).Select(a=>a);
             
+            
             if (Month == "true")
             {
-               Articles = Articles.Where(a => a.TimeCreate.Month.ToString() == MonthSelect);
+               
+                Articles = Articles.Where(a => a.TimeCreate.ToString("MMMM", CultureInfo.InvariantCulture) == MonthSelect);
                 
 
             }
@@ -78,11 +81,11 @@ namespace OurSports1.Controllers
             {
                 Articles = Articles.Where(a => a.CategoryID.ToString() == CategorySelect);
             }
-            else
+            if(Articles == _context.Article.Include(a => a.Author).Include(a => a.Category).Select(a => a))
             {
-              
                 ViewData["Result"] = "empty";
             }
+           
            
             if(Articles.Count()==0)
             {

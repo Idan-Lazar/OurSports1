@@ -4,49 +4,45 @@
 
 <nav class="navbar navbar-light bg-light Searchline">
 
-    <form class="form-inline Searchline Archive" asp-controller="Articles" asp-action="SoccerEvents">
+    <div class="form-inline Searchline Score" asp-controller="Articles" asp-action="SoccerEvents">
         <p>
 
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="true" id="DateFrom" >
-                Date From: <input type="date" class="form-control mr-sm-2 disabled" name="Date From" value="From">
+                
+                Date From: <input type="date" class="form-control mr-sm-2 disabled" name="Date From" value="From" id="DateFrom">
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="true" id="DateTo" >
-                Date To: <input type="date" class="form-control mr-sm-2 disabled" name="Date To" value="To">
+              
+                Date To: <input type="date" class="form-control mr-sm-2 disabled" name="Date To" value="To" id="DateTo">
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="true" id="League">
-                League:<select class="form-control mr-sm-2" value="League" name="League">
-    <option value="437">Israel</option>
-    <option value="62">England</option>
-    <option value="109">Spain</option>
-
-</select>
+                Super League of:<select class="form-control mr-sm-2" value="League" name="League" id="LeagueSelect">
+                    <options>
+                        <option value="62">England</option>
+                        <option value="79">Italy</option>
+                        <option value="109">Spain</option>
+                        <option value="117">Germany</option>
+                        <option value="127">France</option>
+                        <option value="437">Israel</option>
+                        <option value="150">Portugal</option>
+                        <option value="144">Denmark</option>
+                        <option value="284">Belgium</option>
+                        <option value="62">Belgium</option>
+                    </options>
+                </select>
             </div>
-           
-            <button type="submit" class="btn btn-outline-success font-weight-bold " Text="Filter">Filter</button>
-
+            <button class="btn btn-outline-success font-weight-bold Submit " Text="Click">Show</button>
         </p>
-    </form>
-
-    <div>
-        <table border-collapse: collapse border: 5px solid black;>
-            <tr>
-                <th>England</th>
-                <th>Spain</th>
-                <th>Israel</th>
-
-            </tr>
-            <tr>
-                <th> <table class="containerjson"></table> </th>
-                <th> <table class="container1json"></table> </th>
-                <th> <table class="container2json"></table> </th>
-            </tr>
-
-        </table>
-
-
     </div>
+
+</nav>
+
+<div class="socretable">
+
+
+</div>
+
+
+
 
 
