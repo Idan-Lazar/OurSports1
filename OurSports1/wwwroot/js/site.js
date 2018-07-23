@@ -103,13 +103,13 @@ $(function (){
                 type: 'get',
                 cache: false,
                 success: function (data) {
-                    $(data).each(function (index, value) {
+                    var newdata = data.slice(0, 5);
+                    $(newdata).each(function (index, value) {
                         if (value.error == "404" || value.error == "201") {
                             $(".containerjson." + val).append("<h2 class='text-cneter text-danger mx-auto mt-2'>There are no such games!<h2>");
                         }
                         else{
-                            if (index < 5) {
-
+                           
                                 $(".containerjson." + val).append("<div class='score col-sm-auto " + index + "'></div>");
 
                                 $(".containerjson." + val + " div.score." + index).wrapInner("<table class='table'></table>").addClass("box");
@@ -121,7 +121,7 @@ $(function (){
                                 $("td.country_name").addClass("text-danger font-weight-bold");
                                 $(".containerjson." + val + " div.score." + index).wrapInner("<div class='card'></div>");
 
-                            } }
+                           }
                     });
                     
                 }

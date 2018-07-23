@@ -1,19 +1,20 @@
 ﻿@model IEnumerable<OurSports1.Models.Article>
 
 <h2>Soccer Events </h2>
-
+<hr />
+<h4 class="text-black-50 font-weight-bold mb-3">Will show you the first 5 games!</h4>
 <nav class="navbar navbar-light bg-light Searchline">
 
-    <div class="form-inline Searchline Score" asp-controller="Articles" asp-action="SoccerEvents">
+    <div class="form-inline Searchline Score pb-3" asp-controller="Articles" asp-action="SoccerEvents">
         <p>
 
             <div class="form-check">
                 
-                Date From: <input type="date" class="form-control mr-sm-2 disabled" name="Date From" value="From" id="DateFrom">
+                Date From: <input type="date" class="form-control mr-sm-2 disabled" placeholder="2018-01-01" name="Date From" value="2018-01-01" id="DateFrom">
             </div>
             <div class="form-check">
               
-                Date To: <input type="date" class="form-control mr-sm-2 disabled" name="Date To" value="To" id="DateTo">
+                Date To: <input type="date" class="form-control mr-sm-2 disabled" nplaceholder="2018-01-15" ame="Date To" value="2018-02-28" id="DateTo">
             </div>
             <div class="form-check">
                 Super League of:<select class="form-control mr-sm-2" value="League" name="League" id="LeagueSelect">
@@ -25,9 +26,8 @@
                         <option value="127">France</option>
                         <option value="437">Israel</option>
                         <option value="150">Portugal</option>
-                        <option value="144">Denmark</option>
-                        <option value="284">Belgium</option>
-                        <option value="62">Belgium</option>
+                        <option value="284">Denmark</option>
+                        <option value="144">Belgium</option>
                     </options>
                 </select>
             </div>
