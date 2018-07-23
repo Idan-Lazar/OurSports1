@@ -104,7 +104,7 @@ $(function (){
                 cache: false,
                 success: function (data) {
                     $(data).each(function (index, value) {
-                        if (value.error!="") {
+                        if (value.error == "404" || value.error == "201") {
                             $(".containerjson." + val).append("<h2 class='text-cneter text-danger mx-auto mt-2'>There are no such games!<h2>");
                         }
                         else{
