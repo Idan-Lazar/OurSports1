@@ -13,13 +13,12 @@
     <h6> <span class="font-weight-bold"><a asp-controller="Categories" asp-action="Details" asp-route-id="@Model.CategoryID"> @Html.DisplayFor(modelItem => modelItem.Category.Title)</a></span><a asp-controller="Authors" asp-action="Details" asp-route-id="@Model.AuthorID"> @Html.DisplayFor(modelItem => modelItem.Author.AuthorName)</a>  - @Html.DisplayFor(model => model.TimeCreate) </h6>
     <div>
         <img src="~/images/@Model.Image" alt="~/images/~/Sport.jpg" class="Article shadow shadow-sm border-bottom-0 rounded" id="imgdetails">
+        
         <hr />
         <p class="Article">
             @Html.DisplayFor(modelItem => modelItem.Content)
         </p>
-        <video width="400" controls>
-            <source src="~/images/v.mp4" type="video/mp4">
-        </video>
+        
 
 
 

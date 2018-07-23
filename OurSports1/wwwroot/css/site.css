@@ -24,8 +24,8 @@ aside.sideContent {
 }
 
 
-    /* Carousel */
-    .carousel-caption p {
+/* Carousel */
+.carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
 }
@@ -123,10 +123,13 @@ img.Article.BoxIndex {
    width:100%;
    height:350px;
 }
+.Article
+{
+    font-size:x-large;
+}
 
 table.ArticleTable {
     margin: auto;
-   
     width: 1000px;
     border-collapse: separate;
     border-spacing: 10px 10px;
