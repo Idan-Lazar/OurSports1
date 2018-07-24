@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace OurSports1.Controllers
 {
-   
+
     [Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
@@ -54,6 +54,19 @@ namespace OurSports1.Controllers
             return View(category);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<List<Author>> CategoryAjax(int Categoryid)
+        {
+
+            var a = (from category in _context.Category
+                    where category.ID == Categoryid
+                    join article in _context.Article on category.ID equals article.CategoryID
+                    join author in _context.Author on article.AuthorID equals author.ID
+                    select  author).Distinct<Author>();
+
+            return (await a.ToListAsync());
+        }
         // GET: Categories/Create
         public IActionResult Create()
         {

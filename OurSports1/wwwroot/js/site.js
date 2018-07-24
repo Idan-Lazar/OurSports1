@@ -31,7 +31,7 @@ $(".holder").has("a").ready(function () {
     $(".holder").addClass("Page navigation example m-0 ");
     $(".holder a").wrap("<li class='page- item'></li>");
     $(".holder a").addClass("page-link");
-    
+   
 });
 
 
@@ -48,6 +48,25 @@ $(".Searchline input").click(function () {
    
 });
 
+$(function () {
+    $('#btnAuthorsGet').one("click", function () {
+        var idcat = document.getElementsByClassName("categoryid")[0].id;
+        $(".AuthorsTable").html();
+        $.ajax({
+            type: 'GET',
+            data: { Categoryid: idcat },
+            url: '/Categories/CategoryAjax',
+            success: function (result) {
+                $(result).each(function (index, value) {
+                    $(".AuthorsTable").append("<tr class='box " + index + "'></tr>");
+                    $(".AuthorsTable tr.box." + index).append("<a class='btn p-2 btn-primary' href='Authors/Details/" + value.id + "'>" + value.authorName + "</a>");
+
+
+                });
+            }
+        });
+    });
+});
     
 $(function (){
    
@@ -94,7 +113,7 @@ $(function (){
             //    default:
             //        id = "62";
             //}
-
+        
         var urlname = "https://apifootball.com/api/?action=get_events&from=" + datefrom + "&to=" + dateto + "&league_id=" + id + "&APIkey=df4ea49a08ed63529e46516ab69c3012e32ac721aafa8186a1d8c05fd61a5df6";
             $.ajax({
                 
@@ -103,13 +122,15 @@ $(function (){
                 type: 'get',
                 cache: false,
                 success: function (data) {
-                    var newdata = data.slice(0, 5);
-                    $(newdata).each(function (index, value) {
-                        if (value.error == "404" || value.error == "201") {
-                            $(".containerjson." + val).append("<h2 class='text-cneter text-danger mx-auto mt-2'>There are no such games!<h2>");
-                        }
-                        else{
-                           
+                    if (data.length > 5) {
+                        var newdata = data.slice(0, 5);
+                    }
+                        $(newdata).each(function (index, value) {
+                            if (value.error == "404" || value.error == "201") {
+                                $(".containerjson." + val).append("<h2 class='text-cneter text-danger mx-auto mt-2'>There are no such games!<h2>");
+                            }
+                            else {
+
                                 $(".containerjson." + val).append("<div class='score col-sm-auto " + index + "'></div>");
 
                                 $(".containerjson." + val + " div.score." + index).wrapInner("<table class='table'></table>").addClass("box");
@@ -121,8 +142,10 @@ $(function (){
                                 $("td.country_name").addClass("text-danger font-weight-bold");
                                 $(".containerjson." + val + " div.score." + index).wrapInner("<div class='card'></div>");
 
-                           }
-                    });
+                            }
+                        });
+                    
+                    
                     
                 }
             })

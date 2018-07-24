@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <textarea rows="1" asp-for="Content" class="form-control" placeholder="Write Your Comment" onkeyup="countChar(this)" maxlength="200" wrap="soft"> </textarea>
+                <textarea  asp-for="Content" class="form-control" placeholder="Write Your Comment" onkeyup="countChar(this)"  maxlength="200" wrap="soft"> </textarea>
                 <div id="charNum"></div>
                 <span asp-validation-for="Content" class="text-danger"></span>
 

@@ -33,7 +33,7 @@ aside.sideContent {
 	
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] { 
-    width: 100%;
+    width: 4100%;
 }
 
 /* QR code generator */
@@ -99,7 +99,8 @@ textarea#Content {
 }
 
     td .BoxImg{
-    width:300px;
+   
+
 
 }
 img.Article.BoxImg {
@@ -127,10 +128,13 @@ img.Article.BoxIndex {
 {
     font-size:x-large;
 }
-
+table.AuthorsTable {
+    border-collapse: separate;
+    border-spacing: 10px 10px;
+}
 table.ArticleTable {
     margin: auto;
-    width: 1000px;
+    width: auto;
     border-collapse: separate;
     border-spacing: 10px 10px;
 }

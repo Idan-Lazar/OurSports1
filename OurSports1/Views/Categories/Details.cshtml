@@ -4,47 +4,51 @@
 
 <div class="mainContent">
     <h2>@Model.Title</h2>
-
+    <div class="categoryid" id="@Model.ID"></div>
     <div>
-
+        <button id="btnAuthorsGet" class="btn btn-secondary"> authors</button>
         <hr />
-        <dl class="dl-horizontal">
-            <table class="ArticleTable">
 
-                <tbody>
-                  
+        <table class="ArticleTable">
 
-                    @foreach (var item in Model.Articles)
-                    {
+            <tbody>
 
-                        <tr class="ArticleBox">
-                            <td align="center">
-                                <img src="~/images/@item.Image" class="Article BoxImg" />
-                            </td>
-                            <td class="ArticleBoxText">
-                                <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
-                                <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
-                                <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
-                                <a class="btn btn-primary" asp-controller="Articles" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
-                            </td>
-                            <td>
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <a class="btn btn-danger" asp-controller="Articles" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                                    <a class="btn btn-danger" asp-controller="Articles" asp-route-id="@item.ID">Delete</a>
-                                }
-                                <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
-                            </td>
-                        </tr>
-                    }
 
-                </tbody>
-            </table>
+                @foreach (var item in Model.Articles)
+                {
 
-        </dl>
+                    <tr class="ArticleBox">
+                        <td align="center">
+                            <img src="~/images/@item.Image" class="Article BoxImg" />
+                        </td>
+                        <td class="ArticleBoxText">
+                            <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
+                            <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
+                            <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
+                            <a class="btn btn-primary" asp-controller="Articles" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
+                        </td>
+                        <td>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="btn btn-danger" asp-controller="Articles" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                                <a class="btn btn-danger" asp-controller="Articles" asp-route-id="@item.ID">Delete</a>
+                            }
+                            <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+
     </div>
     <div>
-        
+        <hr />
+
         <a asp-controller="Articles" asp-action="Index" class="btn btn-secondary">Back To Home</a>
     </div>
-    </div>
+</div>
+<aside>
+    <table class="AuthorsTable"></table>
+</aside>
