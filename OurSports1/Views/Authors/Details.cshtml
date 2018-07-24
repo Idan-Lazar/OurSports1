@@ -7,7 +7,14 @@
 
 <div>
     <h4>Author</h4>
+    <div class="authorid" id="@Model.ID"></div>
+
+    <button id="btnCommentGet" class="btn btn-secondary"> comments</button>
+
     <hr />
+    <div class="CommentTable Author">
+
+    </div>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.AuthorName)
@@ -25,7 +32,8 @@
             @Html.DisplayNameFor(model => model.Image)
         </dt>
         <dd>
-            <img src="~/images/@Model.Image" alt="~/images/~/Sport.jpg" class="Article shadow shadow-sm border-bottom-0 rounded" id="imgdetails">        </dd>
+            <img src="~/images/@Model.Image" alt="~/images/~/Sport.jpg" class="Article shadow shadow-sm border-bottom-0 rounded" id="imgdetails">
+        </dd>
     </dl>
 
     <table class="ArticleTable">
@@ -35,7 +43,7 @@
         <col width="400">
 
         @foreach (var item in Model.Articles)
-            {
+        {
             <tr class="ArticleBox">
 
                 <td>
@@ -46,7 +54,7 @@
                     <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
 
                     <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
-                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
+                    <a class="btn btn-primary" asp-controller="Articles" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
                 </td>
 
 
@@ -55,7 +63,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <a class="btn btn-danger" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                     }
 
                     <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />

@@ -27,6 +27,18 @@ namespace OurSports1.Controllers
             return View(await _context.Author.ToListAsync());
         }
 
+        public async Task<List<Comment>> AuthorsAjax(int Authorid)
+        {
+
+            var a = (from author in _context.Author
+                     where author.ID == Authorid
+                     join article in _context.Article on author.ID equals article.AuthorID
+                     join comment in _context.Comment on article.ID equals comment.ArticleID
+                     select comment).Distinct<Comment>().Take(5); 
+           
+                       return (await a.ToListAsync());
+        }
+
         // GET: Authors/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
@@ -58,7 +70,7 @@ namespace OurSports1.Controllers
             return View();
         }
 
-      
+
         // POST: Authors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

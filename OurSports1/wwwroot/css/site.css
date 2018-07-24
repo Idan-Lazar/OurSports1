@@ -131,12 +131,17 @@ img.Article.BoxIndex {
 table.AuthorsTable {
     border-collapse: separate;
     border-spacing: 10px 10px;
+
+   
 }
 table.ArticleTable {
     margin: auto;
     width: auto;
     border-collapse: separate;
     border-spacing: 10px 10px;
+}
+.slide{
+    top:-20px;
 }
 li{
     list-style:none;
