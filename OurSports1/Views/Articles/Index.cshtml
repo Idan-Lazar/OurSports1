@@ -9,7 +9,7 @@
     Article first = Model.First();
 }
 
-    
+
 <div class="mainContent">
 
 
@@ -50,25 +50,10 @@
                         </td>
                         <td class="ArticleBoxText">
                             <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
-                            <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
+                            <span id="xxx">@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
                             <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
                             <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
 
-                            @*<a id="sharefblink" target="_top" href="http://www.facebook.com/sharer.php?
-                                 u=http://localhost:54552/Articles/Details/11">share</a>
-
-
-
-                                <div id="fb-root"></div>
-                                <script>
-                                    (function (d, s, id) {
-                                        var js, fjs = d.getElementsByTagName(s)[0];
-                                        if (d.getElementById(id)) return;
-                                        js = d.createElement(s); js.id = id;
-                                        js.src = 'https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v3.0';
-                                        fjs.parentNode.insertBefore(js, fjs);
-                                    }(document, 'script', 'facebook-jssdk'));</script>
-                                <div class="fb-share-button" data-href="/Articles/Details/11" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A54552%2FArticles%2FDetails%2F11&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">שתף</a></div>*@
                         </td>
 
 
@@ -104,8 +89,27 @@
         </div>
     </section>
     <a class="btn btn-outline-info" asp-action="SoccerEvents">To The Soccer Events..</a>
+    <br />
+
     @if (User.Identity.IsAuthenticated)
-    {<p>
-            <a asp-action="Create">Create New</a>
-        </p>        }
+    {<p><font face="verdana">
+    <a asp-action="Create">Create New</a>
+</font>
+        </p>}    
+    <canvas id="myCanvas" width="300" height="50" style="border:10px solid #00ff21;" >
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    <br />
+
+
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        ctx.font = "30px Arial";
+        ctx.strokeText("Video:", 10, 30);
+    </script>
+    <video width="300" height="240" controls loop autoplay>
+        <source src="~/images/loop.mp4" type="video/mp4">
+    </video>
+
 </aside>

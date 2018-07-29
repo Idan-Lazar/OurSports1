@@ -69,6 +69,27 @@ $(function () {
     });
 });
 
+//$(function () {
+//    $('#btnAuthorsGet1').one("click", function () {
+//        var idcat = document.getElementsByClassName("categoryid")[0].id;
+//        $(".AuthorsTable1").html();
+//        $.ajax({
+//            type: 'GET',
+//            data: { Categoryid: idcat },
+//            url: '/Categories/CategoryAjax',
+//            success: function (result) {
+//                $(result).each(function (index, value) {
+//                    $(".AuthorsTable").append("<tr class='box " + index + "'></tr>");
+//                    $(".AuthorsTable tr.box." + index).append("<a class='btn p-2 btn-primary' href='Authors/Details/" + value.id + "'>" + value.authorName + "</a>");
+
+
+//                });
+//            }
+//        });
+
+//    });
+//});
+
 $(function () {
     $('#btnCommentGet').one("click", function () {
         var idaut = document.getElementsByClassName("authorid")[0].id;

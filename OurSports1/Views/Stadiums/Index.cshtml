@@ -29,7 +29,30 @@
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3392.711311510527!2d35.192819084339135!3d31.75107998129386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502d78d1aad9a03%3A0x12d30a9ba15ca0ce!2z15DXpteY15PXmdeV158g15jXk9eZ!5e0!3m2!1siw!2sus!4v1531764159681" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <div id='myMap' style='width: 500px; height: 500px;'></div>
+                    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AmJF2QKfwMwilsW_ZGeGsP1vRNgWRIo7MrZObsobTpFDQZArCw4dkw9ICoee_2YX&callback=loadMapScenario' async defer></script>
+                    <script type='text/javascript'>
+                            function loadMapScenario() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                                /* No need to set credentials if already passed in URL */
+                                //center: new Microsoft.Maps.Location(47.624527, -122.355255),
+                    zoom: 8 });
+                Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+                    var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+                    var requestOptions = {
+                                bounds: map.getBounds(),
+                        where: '@item.Title',
+                        callback: function (answer, userData) {
+                                map.setView({ bounds: answer.results[0].bestView});
+                            map.entities.push(new Microsoft.Maps.Pushpin(answer.results[0].location));
+                        }
+                    };
+                    searchManager.geocode(requestOptions);
+                });
+
+            }
+                    </script>
+
                 </td>
 
             </tr>

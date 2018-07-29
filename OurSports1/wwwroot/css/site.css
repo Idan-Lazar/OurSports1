@@ -65,14 +65,12 @@ img.Article {
     height: 150px;
 }
 
-
-
 .Title {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
-    font-size:35px;
+    font-size: 35px;
     text-decoration-style: solid;
-    
+    text-shadow: 2px 2px #000000;
 }
 .ArticleBox.Title {
     text-shadow: 0.7px 0.7px 1px grey;
@@ -151,6 +149,7 @@ table.comments.table {
     width: auto;
     border-collapse: separate;
     border-spacing: 10px 10px;
+
 }
 
 tr.comments{

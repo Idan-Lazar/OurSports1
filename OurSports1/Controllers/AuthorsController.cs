@@ -38,6 +38,14 @@ namespace OurSports1.Controllers
            
                        return (await a.ToListAsync());
         }
+        //public async Task<IActionResult> AuthorsGroupby(int Authorid)
+        //{
+
+        //    var webSportContext = _context.Author.Where(a => a.ID == Authorid).GroupBy(a => a.Articles);
+
+        //    return View(await webSportContext.ToListAsync());
+
+        //}
 
         // GET: Authors/Details/5
         [AllowAnonymous]
