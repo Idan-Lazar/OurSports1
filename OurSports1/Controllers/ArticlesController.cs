@@ -411,7 +411,7 @@ namespace OurSports1.Controllers
         }
 
 
-        public JsonResult AuthorsGraph()
+        public JsonResult AuthorGraph()
         {
             List<Result> salesCount = new List<Result>();
 
