@@ -9,6 +9,8 @@ using OurSports1.Models;
 using OurSports1.Data;
 using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
+using Accord.MachineLearning.VectorMachines.Learning;
+using Accord.Statistics.Kernels;
 
 namespace OurSports1.Controllers
 {
@@ -16,12 +18,20 @@ namespace OurSports1.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        public List<Category> CategoryE;
+
+        public List<Author> AuthorE;
+
         public ArticlesController(ApplicationDbContext context)
         {
             _context = context;
+            CategoryE = _context.Category.ToList();
+            AuthorE = _context.Author.ToList();
+
+
         }
 
-        
+
         // GET: Articles
         public async Task<IActionResult> Index()
         {
@@ -102,6 +112,100 @@ namespace OurSports1.Controllers
           
             return View(await webSportContext.ToListAsync());
         }
+        public async Task<IActionResult> SuggestedArticles(int id)
+        {
+
+            int cat = 0, aut = 0;
+            var viewmodel = new ViewModle();
+            double[][] Input = new double[1][];
+
+            viewmodel.article = _context.Article.Find(id);
+
+
+
+            cat = CategoryE.IndexOf(viewmodel.article.Category);
+            aut = AuthorE.IndexOf(viewmodel.article.Author);
+
+           
+
+            Input[0] = new double[] { cat, aut };
+            int[] x = Learning(Input, id);
+
+            int prodcutid = x[0];
+            //var viewmodel = new ViewModle();
+            //viewmodel.Products = db.Products.Find(2);
+            var result = _context.Article.Where(p => p.ID == prodcutid);
+            return View(await result.ToListAsync());
+        }
+
+
+        public int[] Learning(double[][] Inputs, int id)
+        {
+            var articles = (from p in _context.Article
+                            select p).ToArray();
+
+            int cat = 0, aut = 0;
+            int length = articles.Length;
+            int lastID = articles[length - 1].ID;
+            double[][] Input = new double[lastID + 1][];
+            int[] output = new int[lastID + 1];
+            for (int i = 0; i <= lastID; i++)
+            {
+                for (int j = 0; j < articles.Length; j++)
+                {
+                    if (articles[j].ID == i)
+                    {
+                        if (articles[j].ID != id) //skip the current item
+                        {
+                            if (CategoryE.Contains(articles[j].Category))
+                            {
+                                //Console.WriteLine(products[j].Resolution);
+                                cat = CategoryE.IndexOf(articles[j].Category);
+                              
+
+                            }
+                            if (AuthorE.Contains(articles[j].Author))
+                            {
+                                aut = AuthorE.IndexOf(articles[j].Author);
+                            }
+
+
+                            Input[i] = new double[] { cat, aut };
+                            output[i] = articles[j].ID;
+                            break;
+                        }
+                        else
+                        { //outlier
+                            Input[i] = new double[] { 20, 20 };
+                            output[i] = id;
+                        }
+                    }
+                    else
+                    {
+                        Input[i] = new double[] { 20, 20 };
+                        output[i] = i;
+                    }
+                }
+            }
+            // Create the Multi-label learning algorithm for the machine
+            var teacher = new MulticlassSupportVectorLearning<Linear>()
+            {
+                Learner = (p) => new SequentialMinimalOptimization<Linear>()
+                {
+                    Complexity = 10000.0 // Create a hard SVM
+                }
+            };
+
+            // Learn a multi-label SVM using the teacher
+            var svm = teacher.Learn(Input, output);
+
+
+            // Compute the classifier answers for the given inputs
+            int[] answers = svm.Decide(Inputs);
+
+            return answers;
+        }
+
 
         // GET: Articles/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -277,5 +381,67 @@ namespace OurSports1.Controllers
         {
             return _context.Article.Any(e => e.ID == id);
         }
+        public ActionResult Statistics()
+        {
+            var buys = _context.Article.Include(b => b.Category).Include(b => b.Author);
+            return View(buys.ToList());
+        }
+
+        public JsonResult CategoryGraph()
+        {
+            List<Result> salesCount = new List<Result>();
+
+
+            var myGroup = from a in _context.Article
+                          group a by a.Category.Title into cat
+                          select new
+                          {
+                              CategoryName = cat.Key,
+                              sum = cat.Count()
+                          };
+
+            foreach (var item in myGroup)
+            {
+                Result numReviews = new Result();
+                numReviews.State = item.CategoryName;
+                numReviews.freq = item.sum;
+                salesCount.Add(numReviews);
+            }
+            return Json(salesCount);
+        }
+
+
+        public JsonResult AuthorsGraph()
+        {
+            List<Result> salesCount = new List<Result>();
+
+
+            var myQuery2 = from a in _context.Article
+                           group a by a.Author.AuthorName into brand
+                           select new
+                           {
+                               AuthorName = brand.Key,
+                               sum = brand.Count()
+                           };
+
+
+
+            foreach (var item in myQuery2)
+            {
+                Result numReviews = new Result();
+                numReviews.State = item.AuthorName;
+                numReviews.freq = Convert.ToInt32(item.sum);
+                salesCount.Add(numReviews);
+            }
+            return Json(salesCount);
+        }
+
+    }
+
+    internal class Result
+    {
+        public String State { get; set; }
+        public int freq { get; set; }
+
     }
 }

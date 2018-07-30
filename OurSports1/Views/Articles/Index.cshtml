@@ -11,35 +11,35 @@
 
 
 <div class="mainContent">
+    <section>
 
-
-    <div id="carouselExampleSlidesOnly" class="carousel slide  shadow shadow-lg border border-success">
-        <div class="carousel">
-            <div class="carousel-item active">
-                <img src="~/images/@first.Image" alt="~/images/~/Sport.jpg" class="Article BoxIndex">
-                <div class="carousel-caption d-none d-md-block" role="option" Id="ArticleText">
-                    <h1> @first.Title</h1>
-                    <p>
-                        @first.Secondary_title <br />
-                        <a asp-action="Details" class="btn btn-primary" asp-route-id="@first.ID">Read More..</a>
-                        @if (User.Identity.IsAuthenticated)
+        <div id="carouselExampleSlidesOnly" class="carousel slide  shadow shadow-lg border border-success">
+            <div class="carousel">
+                <div class="carousel-item active">
+                    <img src="~/images/@first.Image" alt="~/images/~/Sport.jpg" class="Article BoxIndex">
+                    <div class="carousel-caption d-none d-md-block" role="option" Id="ArticleText">
+                        <h1> @first.Title</h1>
+                        <p>
+                            @first.Secondary_title <br />
+                            <a asp-action="Details" class="btn btn-primary" asp-route-id="@first.ID">Read More..</a>
+                            @if (User.Identity.IsAuthenticated)
                         {
                             <br /> <br /> <a class="btn btn-danger" asp-action="Edit" asp-route-id="@first.ID">Edit</a>
                             <a class="btn btn-danger" asp-action="Delete" asp-route-id="@first.ID">Delete</a>
-                        }
+                    }
 
-                    </p>
+                        </p>
+                    </div>
+
                 </div>
-
             </div>
         </div>
-    </div>
-    <dl class="dl-horizontal">
-        <table class="ArticleTable">
+        <dl class="dl-horizontal">
+            <table class="ArticleTable">
 
-            <tbody>
+                <tbody>
 
-                @foreach (var item in Model.Where(a => a.ID != Model.First().ID))
+                    @foreach (var item in Model.Where(a => a.ID != Model.First().ID))
                 {
 
 
@@ -60,56 +60,61 @@
 
                         <td>
                             @if (User.Identity.IsAuthenticated)
-                            {
-                                <a class="btn btn-danger" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                            }
+                        {
+                            <a class="btn btn-danger" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    }
 
                             <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
                         </td>
                     </tr>
 
 
-                }
+            }
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
-    </dl>
-</div>
-<aside class="sideContent">
-    <section>
-        <div class="card" style="width: 18rem;">
-            <img class="ArchiveImage" src="~/images/archive.jpg">
-            <div class="card-body">
-                <h5 class="card-title">Archive</h5>
-                <p class="card-text">If you want to<span class="font-weight-bold text-uppercase"> Search</span> and <span class="font-weight-bold text-uppercase">find out</span> more Articles, <br /> The Archive is the right place for you!</p>
-                <a class="btn btn-outline-info" asp-action="IndexAll">To The Archive..</a>
-            </div>
-        </div>
+        </dl>
     </section>
-    <a class="btn btn-outline-info" asp-action="SoccerEvents">To The Soccer Events..</a>
-    <br />
 
-    @if (User.Identity.IsAuthenticated)
-    {<p><font face="verdana">
-    <a asp-action="Create">Create New</a>
-</font>
-        </p>}    
-    <canvas id="myCanvas" width="300" height="50" style="border:10px solid #00ff21;" >
-        Your browser does not support the HTML5 canvas tag.
-    </canvas>
-    <br />
+</div>
+<div class="AsideContent">
+    <aside class="sideContent">
+        <section>
+            <div class="card" style="width: 18rem;">
+                <img class="ArchiveImage" src="~/images/archive.jpg">
+                <div class="card-body">
+                    <h5 class="card-title">Archive</h5>
+                    <p class="card-text">If you want to<span class="font-weight-bold text-uppercase"> Search</span> and <span class="font-weight-bold text-uppercase">find out</span> more Articles, <br /> The Archive is the right place for you!</p>
+                    <a class="btn btn-outline-info" asp-action="IndexAll">To The Archive..</a>
+                </div>
+            </div>
+        </section>
+        <a class="btn btn-outline-info" asp-action="SoccerEvents">To The Soccer Events..</a>
+        <br />
+
+        @if (User.Identity.IsAuthenticated)
+        {<p>
+                <font face="verdana">
+                    <a asp-action="Create">Create New</a>
+                </font>
+            </p>}
+        <canvas id="myCanvas" width="300" height="50" style="border:10px solid #00ff21;">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+        <br />
 
 
-    <script>
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
-        ctx.font = "30px Arial";
-        ctx.strokeText("Video:", 10, 30);
-    </script>
-    <video width="300" height="240" controls loop autoplay>
-        <source src="~/images/loop.mp4" type="video/mp4">
-    </video>
+        <script>
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            ctx.font = "30px Arial";
+            ctx.strokeText("Video:", 10, 30);
+        </script>
+        <video width="300" height="240" controls loop autoplay>
+            <source src="~/images/loop.mp4" type="video/mp4">
+        </video>
 
-</aside>
+    </aside>
+</div>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<OurSports1.Models.Article>
+<section class="products">
+    <link rel="stylesheet" href="~/Content/style.css" type="text/css" media="screen" />
+
+	
+        @foreach (var item in Model)
+    {
+        <ReArticle>
+
+            <li>
+                <table class="ArticleTable">
+                    <tr class="ArticleBox">
+                        <td align="center" class="BoxImg">
+                            <img src="~/images/@item.Image" class="Article BoxImg" />
+                        </td>
+                        <td class="ArticleBoxText">
+                            <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
+                            <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
+                            <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
+                            <a class="btn btn-primary" asp-controller="Articles" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
+                        </td>
+                        <td>
+                            @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn btn-danger" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    }
+                            <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            }
+        </ReArticle>
+}
+        <!-- more products -->
+
+</section>

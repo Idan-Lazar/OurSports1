@@ -56,7 +56,7 @@ namespace OurSports1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title")] Stadiums s)
+        public async Task<IActionResult> Create([Bind("ID,Title,State,Street,City,NumHouse")] Stadiums s)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace OurSports1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title")] Stadiums s)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,State,Street,City,NumHouse")] Stadiums s)
         {
             if (id != s.ID)
             {

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<OurSports1.Models.Article>
+
+
+
+<div class="mainContent">
+    <h2>Suggested Article/s...</h2>
+
+    <hr />
+
+    <table class="ArticleTable">
+
+        <tbody>
+
+
+            @foreach (var item in Model)
+            {
+
+                <tr class="ArticleBox">
+                    <td align="center">
+                        <img src="~/images/@item.Image" class="Article BoxImg" />
+                    </td>
+                    <td class="ArticleBoxText">
+                        <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
+                        <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
+                        <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
+                        <a class="btn btn-primary" asp-controller="Articles" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
+                    </td>
+                    <td>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn btn-danger" asp-controller="Articles" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                            <a class="btn btn-danger" asp-controller="Articles" asp-route-id="@item.ID">Delete</a>
+                        }
+                        <span>@Html.DisplayFor(modelItem => item.TimeCreate)</span> <br />
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+
+</div>
+<div>
+    <hr />
+
+    <a asp-controller="Articles" asp-action="Index" class="btn btn-secondary">Back To Home</a>
+</div>
+
+

@@ -69,6 +69,9 @@ $(function () {
     });
 });
 
+
+
+
 //$(function () {
 //    $('#btnAuthorsGet1').one("click", function () {
 //        var idcat = document.getElementsByClassName("categoryid")[0].id;
@@ -205,4 +208,6 @@ $(function () {
 
     });
 });
+
+
 

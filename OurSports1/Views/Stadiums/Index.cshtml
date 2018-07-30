@@ -4,58 +4,87 @@
     ViewData["Title"] = "Index";
 }
 
+
+
 <h2>Index</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> @Html.DisplayNameFor(model => model.Title)  @Html.DisplayFor(modelItem => item.Title)</h5>
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                    <div id='myMap' style='width: 500px; height: 500px;'></div>
-                    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AmJF2QKfwMwilsW_ZGeGsP1vRNgWRIo7MrZObsobTpFDQZArCw4dkw9ICoee_2YX&callback=loadMapScenario' async defer></script>
-                    <script type='text/javascript'>
-                            function loadMapScenario() {
-                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
-                                /* No need to set credentials if already passed in URL */
-                                //center: new Microsoft.Maps.Location(47.624527, -122.355255),
-                    zoom: 8 });
-                Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
-                    var searchManager = new Microsoft.Maps.Search.SearchManager(map);
-                    var requestOptions = {
-                                bounds: map.getBounds(),
-                        where: '@item.Title',
-                        callback: function (answer, userData) {
-                                map.setView({ bounds: answer.results[0].bestView});
-                            map.entities.push(new Microsoft.Maps.Pushpin(answer.results[0].location));
-                        }
-                    };
-                    searchManager.geocode(requestOptions);
-                });
 
-            }
-                    </script>
-
-                </td>
-
-            </tr>
+                </div>
+            </div>
+        </div>
         }
-    </tbody>
-</table>
+
+
+<h2>Google Maps - Branches location</h2>
+<div id="map" style="width: 700px; height: 500px;"></div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2wNrayut12HbtkTXZ-TN4dS1tDlywsLE&callback=initMap"
+        async defer></script>
+<script>
+
+    function initMap() {
+        var geocoder;
+        var map;
+        geocoder = new google.maps.Geocoder();
+        var uluru = { lat: 31.974, lng: 34.791 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: uluru
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+        var branches = [];
+        var Titles = [];
+        {
+          @foreach (var d in Model.ToArray()) {
+
+
+    @:branches.push("@d.State + ' ' + @d.City + ' ' +@d.Street + ' ' + @d.NumHouse");
+   @:Titles.push("@d.Title");
+    }
+
+            for (var i = 0; i < branches.length; i++) {
+                var branch = branches[i];
+                var title = Titles[i];
+                var address = branch;
+
+                geocoder.geocode({ address: address }, function (results, status) {
+
+                    if (status == google.maps.GeocoderStatus.OK) {
+
+                        var myResult = results[0].geometry.location; // reference LatLng value
+
+                        var marker = new google.maps.Marker({
+                            position: myResult,
+                            map: map,
+                            title: title
+                        });
+
+                        google.maps.event.addListener(marker, 'click', function () {
+                            infowindow.setContent('<div><strong>' + marker.title + '</strong><br>' +
+                                results[0].formatted_address + '</div>');
+                            infowindow.open(map, this);
+                        });
+                    }
+                });
+            }
+
+        }
+    }
+
+</script>
+

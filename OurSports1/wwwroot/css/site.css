@@ -3,7 +3,9 @@
     padding-bottom: 20px;
 
 }
-
+.AsideContent{
+display:table;
+}
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -29,8 +31,31 @@ aside.sideContent {
     font-size: 20px;
     line-height: 1.4;
 }
+.lala {
+    width: 100px;
+    height: 100px;
+    background: red;
+    transition: width 2s;
+    -webkit-transition: width 2s;
+    webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+#transDemo2 div {
+    width: 70px;
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    /*-ms-transition: all 2s ease-in-out;*/
+    transition: all 2s ease-in-out;
+}
 
-	
+
+    #transDemo2 div:hover, #transDemo2 div.hover_effect {
+        -webkit-transform: rotate(720deg) scale(1.5,1.5);
+        -moz-transform: rotate(720deg) scale(1.5,1.5);
+        -ms-transform: rotate(720deg) scale(1.5,1.5);
+        transform: rotate(720deg) scale(1.5,1.5);
+    }
+
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] { 
     width: 4100%;

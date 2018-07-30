@@ -59,7 +59,22 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Twitter</h5>
-                <a  asp-controller="Tweet" asp-action="Index"><img src="~/images/Twitter.png" width="45" height="37"></a>
+                <a asp-controller="Tweet" asp-action="Index">
+                    <div id="transDemo2">
+                        <div class="hover">
+                            <img src="~/images/Twitter.png" width="45" height="37">
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Statistics</h5>
+                <a class="btn btn-success" asp-controller="Articles" asp-action="Statistics">All Statistics</a>
+
 
             </div>
         </div>
