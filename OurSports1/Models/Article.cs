@@ -13,8 +13,12 @@ namespace OurSports1.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Only Alphabets and Numbers allowed.")]
         public string Title { get; set; }
+        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Only Alphabets and Numbers allowed.")]
+
         public string Secondary_title { get; set; }
+        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Only Alphabets and Numbers allowed.")]
 
         public string Content { get; set; }
         public int AuthorID { get; set; }
@@ -24,7 +28,26 @@ namespace OurSports1.Models
         public virtual Category Category { get; set; }
 
         public DateTime TimeCreate { get; set; }
-        public string Image { get; set; }
+
+        private string image;
+        public string Image
+        {
+            get
+            {
+                return this.image;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    this.image = "Sport.jpg";
+                }
+                else
+                {
+                    image = value;
+                }
+            }
+        }
 
     }
 }

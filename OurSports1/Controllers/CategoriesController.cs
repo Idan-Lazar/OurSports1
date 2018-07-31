@@ -9,27 +9,35 @@ using OurSports1.Data;
 using OurSports1.Models;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.AspNetCore.Authorization;
+using System.Globalization;
 
 namespace OurSports1.Controllers
 {
 
+    
     [Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
+
         public CategoriesController(ApplicationDbContext context)
         {
             _context = context;
         }
-
-        // GET: Categories
         public async Task<IActionResult> Index()
         {
             return View(await _context.Category.ToListAsync());
         }
 
+        // GET: Categories
 
+        [AllowAnonymous]
+        public Task<List<Category>> ListNameCategories()
+        {
+            var a = from category in _context.Category select category;
+            return (a.ToListAsync());
+        }
         [AllowAnonymous]
         // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)

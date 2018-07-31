@@ -15,19 +15,64 @@ namespace OurSports1.Controllers
     public class CommentsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        private static int ArticleID;
         public CommentsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         // GET: Comments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(String Year, String YearSelect, String CommentWriter, String CommentWriterInput, String Writer, String WriterSelect, string Category, String CategorySelect)
         {
-            var webSportContext = _context.Comment.Include(c => c.Article);
+            ViewData["Status"] = "true";
+
+            ViewData["Result"] = "f";
+
+
+            var yeras = new List<String>();
+            for (int year = 2017; year <= DateTime.Now.Year; year++)
+            {
+                yeras.Add(year.ToString());
+            }
+            ViewData["Years"] = new SelectList(yeras);
+            ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Title");
+            var Comments = _context.Comment.Include(a => a.Article).Select(a => a);
+
+
+
+            if (Year == "true")
+            {
+                Comments = Comments.Where(a => a.Article.TimeCreate.Year.ToString() == YearSelect);
+            }
+            if (CommentWriter == "true")
+            {
+                Comments = Comments.Where(a => a.WriterName.ToString().Contains(CommentWriterInput));
+            }
+            if (Category == "true")
+            {
+                Comments = Comments.Where(a => a.Article.CategoryID.ToString() == CategorySelect);
+            }
+            if (Comments == _context.Comment.Include(a => a.Article).Select(a => a))
+            {
+                ViewData["Result"] = "empty";
+            }
+
+
+            if (Comments.Count() == 0)
+            {
+                ViewData["Status"] = "false";
+                ViewData["Result"] = "There is no such Comment...";
+                Comments = _context.Comment.Include(a => a.Article).Select(a => a);
+            }
+            else if (ViewData["Result"].ToString() != "empty")
+            {
+                ViewData["Result"] = "We Found " + Comments.Count() + " Comments For You!";
+            }
+
+            var webSportContext = Comments.OrderByDescending<Comment, DateTime>(a => a.Article.TimeCreate);
+
             return View(await webSportContext.ToListAsync());
         }
-
         // GET: Comments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -51,7 +96,12 @@ namespace OurSports1.Controllers
         // GET: Comments/Create
         public IActionResult Create(int? num)
         {
-            ViewData["ArticleID"] = num;
+            if(num!=null)
+            {
+ ArticleID = (int)num;
+            }
+           
+             ViewData["ArticleID"] = num;
             return View();
         }
         [AllowAnonymous]
@@ -70,14 +120,17 @@ namespace OurSports1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,WriterName,Title,Content,ArticleID")] Comment comment)
         {
+            comment.ArticleID = ArticleID;
+            
             if (ModelState.IsValid)
             {
+                
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Thanks));
             }
-            ViewData["ArticleID"] = new SelectList(_context.Article, "ID", "ID", comment.ArticleID);
-            return View(comment);
+
+            return Create(ArticleID);
         }
 
         // GET: Comments/Edit/5

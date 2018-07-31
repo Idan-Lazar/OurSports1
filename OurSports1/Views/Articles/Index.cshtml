@@ -18,17 +18,19 @@
                 <div class="carousel-item active">
                     <img src="~/images/@first.Image" alt="~/images/~/Sport.jpg" class="Article BoxIndex">
                     <div class="carousel-caption d-none d-md-block" role="option" Id="ArticleText">
-                        <h1> @first.Title</h1>
-                        <p>
-                            @first.Secondary_title <br />
-                            <a asp-action="Details" class="btn btn-primary" asp-route-id="@first.ID">Read More..</a>
+                        <h1 class="TitleCarousel"> @first.Title</h1>
+                        <p class="Secondary_titleCarousel">
+                            @first.Secondary_title
+                        </p>
+                        <a asp-action="Details" class="btn btn-primary" asp-route-id="@first.ID">Read More..</a>
+                          
                             @if (User.Identity.IsAuthenticated)
                         {
-                            <br /> <br /> <a class="btn btn-danger" asp-action="Edit" asp-route-id="@first.ID">Edit</a>
-                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@first.ID">Delete</a>
+                            <a class="btn btn-danger font-weight-bold" asp-action="Edit" asp-route-id="@first.ID">Edit</a>
+                            <a class="btn btn-danger  font-weight-bold" asp-action="Delete" asp-route-id="@first.ID">Delete</a>
                     }
 
-                        </p>
+                       
                     </div>
 
                 </div>
@@ -50,7 +52,7 @@
                         </td>
                         <td class="ArticleBoxText">
                             <span class="Title">@Html.DisplayFor(modelItem => item.Title)</span> <br />
-                            <span id="xxx">@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
+                            <span>@Html.DisplayFor(modelItem => item.Secondary_title)</span> <br />
                             <span><a class="btn btn-success" asp-controller="Authors" asp-action="Details" asp-route-id="@item.AuthorID">@Html.DisplayFor(modelItem => item.Author.AuthorName)</a></span>
                             <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Read More..</a>
 
@@ -95,10 +97,8 @@
         <br />
 
         @if (User.Identity.IsAuthenticated)
-        {<p>
-                <font face="verdana">
+        {<p class="fonti">
                     <a asp-action="Create">Create New</a>
-                </font>
             </p>}
         <canvas id="myCanvas" width="300" height="50" style="border:10px solid #00ff21;">
             Your browser does not support the HTML5 canvas tag.

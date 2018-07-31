@@ -9,6 +9,47 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<nav class="navbar navbar-light bg-light Searchline">
+
+    <form class="form-inline Searchline Archive" asp-controller="Comments" asp-action="Index">
+        <p>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="true" id="Year" name="Year">
+                Year: <select class="form-control mr-sm-2 disabled" type="Year" id="YearSelect" value="Year" name="YearSelect" asp-items="ViewBag.Years" disabled></select>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="true" id="CommentWriter" name="CommentWriter">
+                Comment Writer: <input class="form-control mr-sm-2 disabled " type="Text" id="CommentWriterInput" placeholder="Comment Writer" name="CommentWriterInput" disabled>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="true" id="Category" name="Category">
+                Category: <select class="form-control mr-sm-2" type="text" id="CategorySelect" name="CategorySelect" asp-items="ViewBag.CategoryID" disabled> </select>
+            </div>
+            <button type="submit" class="btn btn-outline-success font-weight-bold " Text="Filter">Filter</button>
+
+        </p>
+    </form>
+
+
+</nav>
+@if (ViewData["Result"].ToString() != "empty")
+{
+    <hr />
+    if (ViewData["Status"].ToString() == "true")
+    {
+
+        <h3 class="font-weight-bold text-success ">@ViewData["Result"]</h3>
+    }
+    else
+    {
+        <h3 class="font-weight-bold text-danger ">@ViewData["Result"]</h3>
+    }
+
+
+}
+        <hr />
 <table class="table">
     <thead>
         <tr>

@@ -12,6 +12,8 @@ namespace OurSports1.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+
         public string AuthorName { get; set; }
 
         [DataType(DataType.Date)]
@@ -20,6 +22,24 @@ namespace OurSports1.Models
 
         public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 
-        public string Image { get; set; }
+        private string image;
+        public string Image
+        {
+            get
+            {
+                return this.image;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    this.image = "Author.jpg";
+                }
+                else
+                {
+                    image = value;
+                }
+            }
+        }
     }
 }

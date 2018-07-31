@@ -28,25 +28,8 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-pills">
-                    <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="1">Israeli Soccer</a>
-                </li>
-             
-                <li class="nav-item">
-
-                    <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="2">World Soccer</a>
-                </li>
-                <li class="nav-item">
-
-                    <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="3">Basketball</a>
-                </li>
+            <ul class="navbar-nav mr-auto Categories">
               
-                <li class="nav-item">
-
-                    <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="5">Tennis</a>
-                </li>
-
 
             </ul>
             <ul class="navbar-nav ml-auto text-center font-weight-bold">
@@ -83,7 +66,7 @@
         </div>
 
     </nav>
-
+   
         <div class="container">
             <div class=" body-content">
                 @RenderBody()

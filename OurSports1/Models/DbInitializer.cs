@@ -12,28 +12,8 @@ namespace OurSports1.Models
 {
     public class DbInitializer
     {
-        public static async System.Threading.Tasks.Task AddUserAsync(IServiceProvider services, string email, string password)
-        {
-            ILogger _logger = services.GetRequiredService<ILogger>();
-            IEmailSender _emailSender = services.GetRequiredService<IEmailSender>();
-            SignInManager<ApplicationUser> _signInManager = services.GetRequiredService<SignInManager<ApplicationUser>>();
+       
 
-            UserManager<ApplicationUser> _userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-            var user = new ApplicationUser { UserName = email, Email = email };
-            var result = await _userManager.CreateAsync(user, password);
-            if (result.Succeeded)
-            {
-                _logger.LogInformation("User created a new account with password.");
-
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-
-                string callbackUrl = null;
-                await _emailSender.SendEmailConfirmationAsync(email, callbackUrl);
-                await _signInManager.SignInAsync(user, isPersistent: false);
-
-            }
-
-        }
         public static void Initialize(ApplicationDbContext context, IServiceProvider services)
         {
 
@@ -64,7 +44,8 @@ namespace OurSports1.Models
             {
                   new Author{AuthorName="Idan Lazar",BirthDate=Convert.ToDateTime("10/05/2000"),Image="A.jpg"},
                    new Author{AuthorName="Idan Frenkel",BirthDate=Convert.ToDateTime("10/06/2000"),Image="A.jpg"},
-                  new Author{AuthorName="Ronel Good",BirthDate=Convert.ToDateTime("10/07/2000"),Image="A.jpg"}
+                  new Author{AuthorName="Ronel Good",BirthDate=Convert.ToDateTime("10/07/2000"),Image="A.jpg"},
+                  new Author{AuthorName="Yuval David",BirthDate=Convert.ToDateTime("07/10/2000"),Image="A.jpg"}
 
         };
             foreach (Author c in Authors)

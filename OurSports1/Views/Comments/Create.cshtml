@@ -1,4 +1,4 @@
-﻿@model OurSports1.Models.Comment
+﻿ @model OurSports1.Models.Comment
 
 @{
     Layout = "_Thanks";
@@ -16,12 +16,12 @@
 
             <div class="form-group">
                 <label asp-for="WriterName" class="control-label"></label>
-                <input asp-for="WriterName" class="form-control" />
+                <input asp-for="WriterName" class="form-control" maxlength="15"/>
                 <span asp-validation-for="WriterName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
+                <input asp-for="Title" class="form-control" maxlength="25"/>
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">

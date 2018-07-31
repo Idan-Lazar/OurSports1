@@ -29,14 +29,7 @@
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                     <a asp-controller="Categories" asp-action="Details" a asp-route-id="@item.ID">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                    <script>
-                    function fbs_click() {
-                        u = location.href;
-                        window.open('http://www.facebook.com/sharer.php?u=' + encodeURIComponent(u) + '&t=' + "/Articles/Details/@item.ID", 'sharer', 'toolbar=0,status=0,width=626,height=436');
-                        return false;
-                    }
-                    </script>
-                    <a href="http://www.facebook.com/share.php?u=<url>" onclick="return fbs_click()" target="_blank">Share on Facebook</a>
+                   
                 </td>
 
             </tr>

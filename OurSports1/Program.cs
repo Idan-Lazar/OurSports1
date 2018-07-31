@@ -27,11 +27,6 @@ namespace OurSports1
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
-
-                    //if (context.Users.Any())
-                    //{
-                    //    DbInitializer.AddUserAsync(services, "Admin@gmail.com", "Admin_1234");
-                    //}
                     DbInitializer.Initialize(context, services);
 
                 }
