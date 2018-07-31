@@ -6,26 +6,35 @@
 
 
 
-<h2>Index</h2>
 
-<p>
+@if (User.Identity.IsAuthenticated)
+{<p>
     <a asp-action="Create">Create New</a>
 </p>
+   
+}
 
-        @foreach (var item in Model)
-        {
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title"> @Html.DisplayNameFor(model => model.Title)  @Html.DisplayFor(modelItem => item.Title)</h5>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+
+@foreach (var item in Model)
+{
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"> @Html.DisplayNameFor(model => model.Title)  @Html.DisplayFor(modelItem => item.Title)</h5>
+
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+
+
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
                     <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-
-                </div>
+                }
             </div>
         </div>
-        }
+    </div>
+}
 
 
 <h2>Google Maps - Branches location</h2>
@@ -34,7 +43,7 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2wNrayut12HbtkTXZ-TN4dS1tDlywsLE&callback=initMap"
         async defer></script>
-<script>
+<script async defer>
 
     function initMap() {
         var geocoder;

@@ -8,8 +8,11 @@
 <div>
     <h4>Author</h4>
     <div class="authorid" id="@Model.ID"></div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <button id="btnCommentGet" class="btn btn-secondary"> comments</button>
+    }
 
-    <button id="btnCommentGet" class="btn btn-secondary"> comments</button>
 
     <hr />
     <div class="CommentTable Author">

@@ -46,6 +46,7 @@ namespace OurSports1.Controllers
             }
             if (CommentWriter == "true")
             {
+                if(CommentWriterInput!=null)
                 Comments = Comments.Where(a => a.WriterName.ToString().Contains(CommentWriterInput));
             }
             if (Category == "true")

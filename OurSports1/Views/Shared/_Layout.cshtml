@@ -29,10 +29,14 @@
 
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav mr-auto Categories">
-              
 
+                <li class="nav-item">
+
+                    <a class="nav-link btn btn-primary font-weight-bold" asp-controller="Stadiums" asp-action="Index" >Stadiums</a>
+                </li>
             </ul>
             <ul class="navbar-nav ml-auto text-center font-weight-bold">
+
                 @if (User.Identity.IsAuthenticated)
                 {
 
@@ -82,7 +86,6 @@
             <script src="~/lib/jquery/dist/jquery.js"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
             <script src="~/js/jPages.js"></script>
-            <script src="~/js/datePicker-2.1.2.js"></script>
             <script src="~/js/site.js" asp-append-version="true"></script>
         </environment>
         <environment exclude="Development">

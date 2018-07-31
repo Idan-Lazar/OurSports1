@@ -12,12 +12,12 @@ namespace OurSports1.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [RegularExpression(@"^[a-zA-Z' '?!]+$", ErrorMessage = "Use letters only please")]
         public string WriterName { get; set; }
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [RegularExpression(@"^[a-zA-Z' '?!]+$", ErrorMessage = "Use letters only please")]
 
         public string Title { get; set; }
-        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Only Alphabets and Numbers allowed.")]
+        [RegularExpression("^[a-zA-Z0-9' '?!]*$", ErrorMessage = "Only Alphabets and Numbers allowed.")]
 
         public string Content { get; set; }
         public int ArticleID { get; set; }

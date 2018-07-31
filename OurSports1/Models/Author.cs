@@ -12,7 +12,7 @@ namespace OurSports1.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [RegularExpression(@"^[a-zA-Z' ']+$", ErrorMessage = "Use letters only please")]
 
         public string AuthorName { get; set; }
 
